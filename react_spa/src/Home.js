@@ -1,21 +1,36 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
  
-class Home extends Component {
-  render() {
+function Search() {
+  const [searchTerm, setSearchTerm] = useState('')
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      console.log(searchTerm)
+      // Send Axios request here
+    }, 3000)
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [searchTerm])
+
+  // render() {
     return (
-      <div>
-        <h2>HELLO</h2>
-        <p>Cras facilisis urna ornare ex volutpat, et
-        convallis erat elementum. Ut aliquam, ipsum vitae
-        gravida suscipit, metus dui bibendum est, eget rhoncus nibh
-        metus nec massa. Maecenas hendrerit laoreet augue
-        nec molestie. Cum sociis natoque penatibus et magnis
-        dis parturient montes, nascetur ridiculus mus.</p>
- 
-        <p>Duis a turpis sed lacus dapibus elementum sed eu lectus.</p>
+      <div className = "container">
+        {/* circle */}
+        <div className = "search-circle">
+          {/* <div className = "search-box"> */}
+            <label for="artist-search">
+            <input 
+              type = "text" 
+              id="artist-search" 
+              placeholder="Search for an artist..." 
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            </label>
+          {/* </div> */}
+        </div>
       </div>
     );
-  }
+  // }
 }
  
-export default Home;
+export default Search;
