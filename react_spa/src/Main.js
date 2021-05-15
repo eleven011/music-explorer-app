@@ -7,6 +7,7 @@ import {
 import Search from "./Home";
 import Stuff from "./Stuff";
 import Contact from "./Contact"; 
+
 class Main extends Component {
   render() {
     return (
