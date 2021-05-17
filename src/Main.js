@@ -4,7 +4,7 @@ import {
   NavLink,
   HashRouter
 } from "react-router-dom";
-import Search from "./Home";
+import Home from "./Home";
 import Stuff from "./Stuff";
 import Contact from "./Contact"; 
 
@@ -20,7 +20,7 @@ class Main extends Component {
                         <li><NavLink to="/contact">Contact</NavLink></li>
                     </ul>
                 <div className="content">
-                    <Route exact path="/" component={Search}/>
+                    <Route exact path="/" component={Home}/>
                     <Route path="/stuff" component={Stuff}/>
                     <Route path="/contact" component={Contact}/>
                 </div>
