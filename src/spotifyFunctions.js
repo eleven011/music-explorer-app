@@ -1,5 +1,11 @@
 import axios from 'axios';
 import qs from 'qs';
+import env from "react-dotenv";
+
+// NOTE TO VIVIAN!!!
+// api calls have issue on your browser unless
+// it's incognito mode
+
 
 // steps for making api call w/ Spotify
 // 1. request auth token using client credentials
@@ -8,9 +14,9 @@ import qs from 'qs';
 // this function gets auth token
 export const getToken = async () =>  {
     const token_URL = 'https://accounts.spotify.com/api/token';
-    const client_id = '3f5721b4d8ed43ba8c22404e8ce29c02'; // Your client id
-    const client_secret = 'baf26abecc134d1192cb9241e956e556'; // Your secret
-
+    const client_id = env.CLIENT_ID;
+    const client_secret = env.CLIENT_SECRET;
+   
     const headers = {
         headers: {
           Accept: 'application/json',
@@ -62,7 +68,10 @@ export const getArtistID = async (artistName) => {
             },
         });
         // we want best match so use index 0
-        return response.data.artists.items[0];
+        return new Promise ((resolve, reject) => {
+            resolve(response.data.artists.items[0]);
+        })
+
     } catch (error) {
         console.log(error);
     }
