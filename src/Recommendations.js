@@ -10,6 +10,10 @@ function Search() {
   const [recommendation, setRecommendation] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
+  var data_obj = {
+      name: ' ',
+      children: [],
+  }
   let recNames = [];
   let listItems;
 
@@ -42,17 +46,24 @@ function Search() {
   }
     // console.log("names array: ", recommendation.Similar.Results);
     // console.log("first name: ", recommendation.Similar.Results[0].Name);
-  
+    if(recommendation === null){
+
+    for (var i = 0; i < 5; ++i) {
+        recNames.push(' ');
+    }
+    }
+    else{
     for (var i = 0; i < 5; ++i) {
       recNames.push(recommendation.Similar.Results[i].Name);
     }
+    }
   
     // DONT NEED console.log("RECNAMES: ", recNames);
-  
     listItems = recNames.map(name => <li>{name}</li>);
   
     // now gotta figure out how to read that info into an object for Kevin:)
     // var data_obj = {};
+
   
     var data_obj = {
       name: searchTerm,
