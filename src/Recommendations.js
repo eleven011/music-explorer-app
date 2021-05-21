@@ -1,6 +1,7 @@
 // import React, { Component } from "react";
 import {useEffect, useState } from "react";
 import{taste_dive_key, base_url} from "./constants";
+import Visuals from "./Visuals";
 // import { directive } from "@babel/types";
 // import ReactDOM from 'react-dom';
 
@@ -39,18 +40,19 @@ function Search() {
     }
   
   }
-    console.log("names array: ", recommendation.Similar.Results);
-    console.log("first name: ", recommendation.Similar.Results[0].Name);
+    // console.log("names array: ", recommendation.Similar.Results);
+    // console.log("first name: ", recommendation.Similar.Results[0].Name);
   
     for (var i = 0; i < 5; ++i) {
       recNames.push(recommendation.Similar.Results[i].Name);
     }
   
-    console.log("RECNAMES: ", recNames);
+    // DONT NEED console.log("RECNAMES: ", recNames);
   
     listItems = recNames.map(name => <li>{name}</li>);
   
     // now gotta figure out how to read that info into an object for Kevin:)
+    // var data_obj = {};
   
     var data_obj = {
       name: searchTerm,
@@ -61,7 +63,6 @@ function Search() {
       data_obj.children.push({ name: recNames[i] });
     }
   
-    console.log("filled data obj: ", data_obj);  
   
 
   return (
@@ -81,8 +82,9 @@ function Search() {
         {/* </div> */}
       </div>
       <div>
-        <h2>{searchTerm}</h2>
-        <ul>{listItems}</ul>
+        {/* <h2>{searchTerm}</h2> */}
+        {/* <ul>{listItems}</ul> */}
+        <Visuals data = {data_obj} />
       </div>
     </div>
   );

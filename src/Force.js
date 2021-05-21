@@ -32,7 +32,7 @@ function Force({ data }){
         // flattens tree. This contains data info +
         // depth of node (depth 0 is root, depth 1 is first child)
         // plus a variety of other functions 
-        const root = hierarchy(data);
+        const root = hierarchy(data.data);
 
         // info from all the descendants 
         const nodeData = root.descendants();
