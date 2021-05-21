@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import Force from "./Force";
 
 // dummy JSON object **** this is where a function is run
+
 const data = {
   name: "Lady Gaga ",
   children: [
@@ -26,6 +27,7 @@ const data = {
     },
   ]
 };
+
 
 function Visuals() {
 return (

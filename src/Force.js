@@ -7,6 +7,9 @@ import {
     forceCenter, 
     forceManyBody, 
     forceCollide,
+    forceX,
+    forceY,
+    drag
 } from "d3";
 import useResizeObserver from "./useResizeObserver";
 
@@ -24,8 +27,8 @@ function Force({ data }){
 
         // trying to figure out how to get rid of this
         svg
-            .attr("height", 900)
-            .attr("width", 900)
+            .attr("height", dimensions.width)
+            .attr("width", dimensions.height)
 
 
         // utility function from d3 (hierarchy).
@@ -76,16 +79,10 @@ function Force({ data }){
                     .attr("r", 15)
                     .attr("fill", "white")
                     .attr("cx", node => node.x)
-                    .attr("cy", node => node.y);
-
-                    /*
-                    .on("click", () => {
-                        console.log(select(this).select("node"))
-                        select(this).select("circle").select("node").transition()
-                        .duration(740)
-                        .attr("r", 50)
-                    });
-                    */
+                    .attr("cy", node => node.y)
+                    .on("click", click)
+                    .on("dblclick", dblclick)
+                    .call(drag);
 
                 // set up the band labels
                 svg
@@ -94,14 +91,41 @@ function Force({ data }){
                     .join("text")
                     .attr("class", "label")
                     .attr("text-anchor", "middle")
-                    .attr("font-size", 20)
+                    .attr("font-size", 12)
                     .text(node => node.data.name)
                     .attr("x", node => node.x)
                     .attr("y", node => node.y)
-                    .on("click", () => {
-                        console.log("hello")
-                    })
                 });
+
+                svg.on("mousemove", () => {
+                    const [x, y] = mouse(svgRef.current);
+                    simulation
+                        .force("x", forceX(x).strength(node => 0.15 + node.depth * 0.1))
+                        .force("y", forceY(y).strength(node => 0.15 + node.depth * 0.1))
+
+                });
+
+                function click() {
+                    svg.select("circle").transition()
+                    //svg.selectAll("circle").transition()
+                        .duration(750)
+                        .attr("r", 25)
+                        .style("fill", "lightsteelblue");
+                    svg.selectAll("text").transition()
+                        .duration(750)
+                        .attr("font-size", 35)
+                }
+
+                function dblclick() {
+                    svg.selectAll("circle").transition()
+                        .duration(750)
+                        .attr("r", 12)
+                        .style("fill", "white");
+                    svg.selectAll("text").transition()
+                        .duration(750)
+                        .attr("font-size", 15)
+                }
+            
 
     }, [data, dimensions]); // any time the data or dimensions change this is called again
 
