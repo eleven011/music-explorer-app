@@ -48,6 +48,16 @@ ul.header li a {
   align-items: center;
 }
 
+.root-artist-circle {
+  background: rgb(209, 19, 19);
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .search-box {
   text-align: center;
   width: 150px;

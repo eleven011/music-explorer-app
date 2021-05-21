@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import Force from "./Force";
+import Search from "./Recommendations";
 
 // dummy JSON object **** this is where a function is run
 
@@ -30,6 +31,7 @@ const data = {
 
 
 function Visuals() {
+  // console.log("Passed data: ", data);
 return (
   <React.Fragment>
     <h2> Test Force Physics</h2>
