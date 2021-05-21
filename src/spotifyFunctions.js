@@ -2,6 +2,7 @@ import axios from 'axios';
 import qs from 'qs';
 import env from "react-dotenv";
 
+
 // NOTE TO VIVIAN!!!
 // api calls have issue on your browser unless
 // it's incognito mode
@@ -14,8 +15,9 @@ import env from "react-dotenv";
 // this function gets auth token
 export const getToken = async () =>  {
     const token_URL = 'https://accounts.spotify.com/api/token';
-    const client_id = env.CLIENT_ID;
-    const client_secret = env.CLIENT_SECRET;
+    
+    const client_id = process.env.REACT_APP_CLIENT_ID;
+    const client_secret = process.env.REACT_APP_CLIENT_SECRET;
    
     const headers = {
         headers: {
