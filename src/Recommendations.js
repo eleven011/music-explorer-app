@@ -25,9 +25,6 @@ function Search() {
 
  
 
-   
-
-
   async function getRecommendation(searchTerm) {
     try {
       let response = await fetch(
@@ -40,33 +37,32 @@ function Search() {
     } catch (error) {
       console.log(error);
     }
-    // outputResults();
+  
   }
-  console.log("Recomendation: ", recommendation);
-  console.log("names array: ", recommendation.Similar.Results);
-  console.log("first name: ", recommendation.Similar.Results[0].Name);
-
-  for (var i = 0; i < 5; ++i) {
-    recNames.push(recommendation.Similar.Results[i].Name);
-  }
-
-  console.log("RECNAMES: ", recNames);
-
-  listItems = recNames.map(name => <li>{name}</li>);
-
-  // now gotta figure out how to read that info into an object for Kevin:)
-
-  var data_obj = {
-    name: searchTerm,
-    children: []
-  };
-
-  for (i = 0; i < 5; ++i) {
-    data_obj.children.push({ name: recNames[i] });
-  }
-
-  console.log("filled data obj: ", data_obj);
-
+    console.log("names array: ", recommendation.Similar.Results);
+    console.log("first name: ", recommendation.Similar.Results[0].Name);
+  
+    for (var i = 0; i < 5; ++i) {
+      recNames.push(recommendation.Similar.Results[i].Name);
+    }
+  
+    console.log("RECNAMES: ", recNames);
+  
+    listItems = recNames.map(name => <li>{name}</li>);
+  
+    // now gotta figure out how to read that info into an object for Kevin:)
+  
+    var data_obj = {
+      name: searchTerm,
+      children: []
+    };
+  
+    for (i = 0; i < 5; ++i) {
+      data_obj.children.push({ name: recNames[i] });
+    }
+  
+    console.log("filled data obj: ", data_obj);  
+  
 
   return (
     <div className="container">
