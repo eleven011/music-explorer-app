@@ -27,15 +27,15 @@ function Force({ data }){
 
         // trying to figure out how to get rid of this
         svg
-            .attr("height", dimensions.width)
-            .attr("width", dimensions.height)
+            .attr("height", 900)
+            .attr("width", 900)
 
 
         // utility function from d3 (hierarchy).
         // flattens tree. This contains data info +
         // depth of node (depth 0 is root, depth 1 is first child)
         // plus a variety of other functions 
-        const root = hierarchy(data);
+        const root = hierarchy(data.data);
 
         // info from all the descendants 
         const nodeData = root.descendants();
