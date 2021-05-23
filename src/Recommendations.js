@@ -1,5 +1,5 @@
 // import React, { Component } from "react";
-import {useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import{taste_dive_key, base_url} from "./constants";
 import Visuals from "./Visuals";
 // import { directive } from "@babel/types";
@@ -92,12 +92,10 @@ function Search() {
         </label>
         {/* </div> */}
       </div>
-      <div>
         {/* <h2>{searchTerm}</h2> */}
         {/* <ul>{listItems}</ul> */}
         <Visuals data = {data_obj} />
       </div>
-    </div>
   );
 }
 

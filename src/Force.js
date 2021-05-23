@@ -11,24 +11,24 @@ import {
     forceY,
     drag
 } from "d3";
-import useResizeObserver from "./useResizeObserver";
+//import useResizeObserver from "./useResizeObserver";
 
 function Force({ data }){
     const svgRef = useRef();
     const wrapperRef = useRef();
-    const dimensions = useResizeObserver(wrapperRef);
+    //const dimensions = useResizeObserver(wrapperRef);
 
     // useEffect hook
     useEffect(() => {
-        if(!dimensions) return;
+        //if(!dimensions) return;
 
         // ref svgRef to set the width + height
         const svg = select(svgRef.current);
 
         // trying to figure out how to get rid of this
         svg
-            .attr("height", dimensions.width)
-            .attr("width", dimensions.height)
+            .attr("height", 600)
+            .attr("width", 600)
 
 
         // utility function from d3 (hierarchy).
@@ -48,12 +48,14 @@ function Force({ data }){
         // see more: https://github.com/d3/d3-force
 
         const simulation = forceSimulation(nodeData)
-            .force("center", forceCenter(dimensions.width / 2, dimensions.height / 2))
+            .force("center", forceCenter(600 / 2, 600 / 2))
             .force("charge", forceManyBody().strength(-30))
             .force("collide", forceCollide(30))
 
             // on "tick" callback function is triggered every time
             // force decays
+
+
             .on("tick", () => {
                 // inside "tick", render nodes/links/circles
 
@@ -77,24 +79,46 @@ function Force({ data }){
                     .join("circle")
                     .attr("class", "node")
                     .attr("r", 15)
-                    .attr("fill", "white")
                     .attr("cx", node => node.x)
                     .attr("cy", node => node.y)
                     .on("click", click)
                     .on("dblclick", dblclick)
-                    .call(drag);
-
+                    .call(drag()
+                        .on('start', dragStart)
+                        .on('drag', dragging)
+                        .on('end', dragEnd)
+                      )
+                  
+                    function dragStart(d,i,nodes){
+                        select(nodes[i])
+                          .style("stroke", "red")  
+                      }
+                      
+                    function dragging(d,i,nodes){
+                        let [xCoor, yCoor] = mouse(svgRef.current)
+                        console.log(select(nodes[i]))
+                        select(nodes[i])
+                          .attr("cx", xCoor)
+                          .attr("cy", yCoor)
+                      }
+                      
+                      function dragEnd(d,i,nodes){
+                         select(nodes[i])
+                          .style("stroke", "black")
+                      }
+                
+                
                 // set up the band labels
                 svg
                     .selectAll(".label")
                     .data(nodeData)
                     .join("text")
                     .attr("class", "label")
-                    .attr("text-anchor", "middle")
-                    .attr("font-size", 12)
+                    .attr("text-anchor", "end")
+                    .attr("font-size", 10)
                     .text(node => node.data.name)
                     .attr("x", node => node.x)
-                    .attr("y", node => node.y)
+                    .attr("y", node => node.y);
                 });
 
                 svg.on("mousemove", () => {
@@ -109,25 +133,25 @@ function Force({ data }){
                     svg.select("circle").transition()
                     //svg.selectAll("circle").transition()
                         .duration(750)
-                        .attr("r", 25)
+                        .attr("r", 100)
                         .style("fill", "lightsteelblue");
-                    svg.selectAll("text").transition()
+                    svg.select("text").transition()
                         .duration(750)
-                        .attr("font-size", 35)
+                        .attr("font-size", 16)
                 }
 
                 function dblclick() {
-                    svg.selectAll("circle").transition()
+                    svg.select("circle").transition()
                         .duration(750)
                         .attr("r", 12)
                         .style("fill", "white");
-                    svg.selectAll("text").transition()
+                    svg.select("text").transition()
                         .duration(750)
-                        .attr("font-size", 15)
+                        .attr("font-size", 12)
                 }
             
 
-    }, [data, dimensions]); // any time the data or dimensions change this is called again
+    }, [data]); // any time the data or dimensions change this is called again
 
     return (
         <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
