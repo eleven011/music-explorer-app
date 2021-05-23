@@ -2,6 +2,9 @@
 import {useEffect, useState } from "react";
 import{base_url} from "./constants";
 import Visuals from "./Visuals";
+import Artist from "./artistSearch";
+import { getArtist } from "./spotifyFunctions";
+import { useHistory } from "react-router-dom";
 // import env from "react-dotenv";
 // import { directive } from "@babel/types";
 // import ReactDOM from 'react-dom';
@@ -10,31 +13,45 @@ import Visuals from "./Visuals";
 function Search() {
   const [recommendation, setRecommendation] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [choice, setChoice] = useState(false);
+  const [artist, setArtist] = useState({});
 
   var data_obj = {
-      name: ' ',
-      children: [],
-  }
+    name: " ",
+    children: []
+  };
   let recNames = [];
   let listItems;
 
+  
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       console.log(searchTerm);
 
-      if (searchTerm !== "") {
-        getRecommendation(searchTerm);
+      const get_artist = async() => {
+        const my_artist =  await getArtist(searchTerm);
+        setArtist(my_artist);
+        setChoice(true);
+        getRecommendation(artist.name);
       }
-    }, 3000);
-    return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm]);
+      if (searchTerm !== "") {
+        get_artist();
+      }
 
- 
+    }, 3000);
+
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm, choice]);
 
   async function getRecommendation(searchTerm) {
     try {
       let response = await fetch(
-        base_url + "k=" + process.env.REACT_APP_TASTEDIVE_KEY + "&q=" + searchTerm
+        base_url +
+          "k=" +
+          process.env.REACT_APP_TASTEDIVE_KEY +
+          "&q=" +
+          searchTerm
       );
       let data = await response.json();
       console.log(data);
@@ -43,38 +60,36 @@ function Search() {
     } catch (error) {
       console.log(error);
     }
-  
   }
-    // console.log("names array: ", recommendation.Similar.Results);
-    // console.log("first name: ", recommendation.Similar.Results[0].Name);
-    if(recommendation === null|| recommendation.Similar.Results.length == 0){
-
+  // console.log("names array: ", recommendation.Similar.Results);
+  // console.log("first name: ", recommendation.Similar.Results[0].Name);
+  if (recommendation === null || recommendation.Similar.Results.length === 0) {
     for (var i = 0; i < 5; ++i) {
-        recNames.push(' ');
+      recNames.push(" ");
     }
-    }
-    else{
+  } else {
     for (var i = 0; i < 5; ++i) {
       recNames.push(recommendation.Similar.Results[i].Name);
     }
-    }
-  
-    listItems = recNames.map(name => <li>{name}</li>);
-  
-    // now gotta figure out how to read that info into an object for Kevin:)
-    // var data_obj = {};
+  }
 
-  
-    var data_obj = {
-      name: searchTerm,
-      children: []
-    };
-  
-    for (i = 0; i < 5; ++i) {
-      data_obj.children.push({ name: recNames[i] });
-    }
-  
+  listItems = recNames.map(name => <li>{name}</li>);
 
+  // now gotta figure out how to read that info into an object for Kevin:)
+  // var data_obj = {};
+
+  var data_obj = {
+    name: searchTerm,
+    children: []
+  };
+
+  for (i = 0; i < 5; ++i) {
+    data_obj.children.push({ name: recNames[i] });
+  }
+
+// if(choice === false){
+  let history = useHistory();
+  const handleOnClick =  history.push('/results');
   return (
     <div className="container">
       {/* circle */}
@@ -87,17 +102,36 @@ function Search() {
             placeholder="Search for an artist..."
             onChange={e => setSearchTerm(e.target.value)}
           />
-          <input className="btn btn-primary" type="submit" value="search" />
+          <input className="btn btn-primary" type="submit" value="search" onClick= {handleOnClick} />
         </label>
         {/* </div> */}
       </div>
       <div>
-        {/* <h2>{searchTerm}</h2> */}
-        {/* <ul>{listItems}</ul> */}
-        <Visuals data = {data_obj} />
+        {/* <Visuals data={data_obj} /> */}
       </div>
     </div>
-  );
-}
 
+  );
+// }
+
+  // else{
+  //   return (
+  //     <div className= "container"> 
+  //       <Artist artist={artist}/>
+  //       <Visuals data={data_obj}/>
+  //     </div>
+  //   );
+  // }
+
+}
 export default Search;
+
+
+
+// function theonhover(){
+//   return (
+//       <div>
+//         <Artist artist={artist}/>
+//       </div>
+//   );
+// }

@@ -34,7 +34,7 @@ function Visuals(data) {
   // console.log("Passed data: ", data);
 return (
   <React.Fragment>
-    <h2> Test Force Physics</h2>
+    {/* <h2> Test Force Physics</h2> */}
     <Force data = {data} />
   </React.Fragment>
 )

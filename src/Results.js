@@ -1,7 +1,9 @@
 import React, { Component } from "react";
  
-class Contact extends Component {
-  render() {
+
+function Results() {
+
+
     return (
       <div>
         <h2>GOT QUESTIONS?</h2>
@@ -11,6 +13,6 @@ class Contact extends Component {
       </div>
     );
   }
-}
+
  
-export default Contact;
+export default Results;

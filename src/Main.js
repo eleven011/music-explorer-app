@@ -6,9 +6,10 @@ import {
 } from "react-router-dom";
 import Search from "./Home";
 import Visuals from "./Visuals";
-import Contact from "./Contact"; 
+import Results from "./Results"; 
 import Recommendations from "./Recommendations";
 
+let artistName;
 class Main extends Component {
   render() {
     return (
@@ -18,14 +19,13 @@ class Main extends Component {
                     <ul className="header">
                         <li><NavLink to="/">Home</NavLink></li>
                         <li><NavLink to="/visuals">Visuals</NavLink></li>
-                        <li><NavLink to="/contact">Contact</NavLink></li>
                         <li><NavLink to="/recommendations">Recs</NavLink></li>
                     </ul>
                 <div className="content">
                     <Route exact path="/" component={Search}/>
                     <Route path="/visuals" component={Visuals}/>
-                    <Route path="/contact" component={Contact}/>
                     <Route path="/recommendations" component={Recommendations}/>
+                    <Route path='/results' render={() => <Results artistName={artistName} />}/>
                 </div>
             </div>
         </HashRouter>
