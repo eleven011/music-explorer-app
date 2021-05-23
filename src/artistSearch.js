@@ -15,7 +15,8 @@ const Artist = ({artist}) => {
       return (
             <div className = "container">
                 <div className = "root-artist-circle">
-                    {<p>{artist.name}</p>}
+                    <img src={artist.imageURL} width="100" height="100"/>
+                    {<h2>{artist.name}</h2>}
                 </div>
             </div>
       ); 

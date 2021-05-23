@@ -1,7 +1,13 @@
 // import React, { Component } from "react";
+<<<<<<< HEAD
 import React, {useEffect, useState } from "react";
 import{taste_dive_key, base_url} from "./constants";
+=======
+import {useEffect, useState } from "react";
+import{base_url} from "./constants";
+>>>>>>> aaad55c25d9a5ee5d9d2d6ced4e5b57279f81a53
 import Visuals from "./Visuals";
+// import env from "react-dotenv";
 // import { directive } from "@babel/types";
 // import ReactDOM from 'react-dom';
 
@@ -33,11 +39,11 @@ function Search() {
   async function getRecommendation(searchTerm) {
     try {
       let response = await fetch(
-        base_url + "k=" + taste_dive_key + "&q=" + searchTerm
+        base_url + "k=" + process.env.REACT_APP_TASTEDIVE_KEY + "&q=" + searchTerm
       );
       let data = await response.json();
       console.log(data);
-      console.log(base_url + "k=" + taste_dive_key + "&q=" + searchTerm);
+      // console.log(base_url + "k=" + taste_dive_key + "&q=" + searchTerm);
       setRecommendation(data);
     } catch (error) {
       console.log(error);
@@ -58,7 +64,6 @@ function Search() {
     }
     }
   
-    // DONT NEED console.log("RECNAMES: ", recNames);
     listItems = recNames.map(name => <li>{name}</li>);
   
     // now gotta figure out how to read that info into an object for Kevin:)
@@ -73,7 +78,6 @@ function Search() {
     for (i = 0; i < 5; ++i) {
       data_obj.children.push({ name: recNames[i] });
     }
-  
   
 
   return (
