@@ -52,7 +52,7 @@ function Search() {
   }
     // console.log("names array: ", recommendation.Similar.Results);
     // console.log("first name: ", recommendation.Similar.Results[0].Name);
-    if(recommendation === null){
+    if(recommendation === null|| recommendation.Similar.Results.length == 0){
 
     for (var i = 0; i < 5; ++i) {
         recNames.push(' ');
