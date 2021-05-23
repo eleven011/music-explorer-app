@@ -1,6 +1,11 @@
 // import React, { Component } from "react";
+<<<<<<< HEAD
+import React, {useEffect, useState } from "react";
+import{taste_dive_key, base_url} from "./constants";
+=======
 import {useEffect, useState } from "react";
 import{base_url} from "./constants";
+>>>>>>> aaad55c25d9a5ee5d9d2d6ced4e5b57279f81a53
 import Visuals from "./Visuals";
 import Artist from "./artistSearch";
 import { getArtist } from "./spotifyFunctions";
@@ -106,11 +111,18 @@ function Search() {
         </label>
         {/* </div> */}
       </div>
+<<<<<<< HEAD
       <div>
         {/* <Visuals data={data_obj} /> */}
       </div>
     </div>
 
+=======
+        {/* <h2>{searchTerm}</h2> */}
+        {/* <ul>{listItems}</ul> */}
+        <Visuals data = {data_obj} />
+      </div>
+>>>>>>> af5c7830a557c29ccd4c030929ae063098c50a89
   );
 // }
 

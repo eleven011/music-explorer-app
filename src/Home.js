@@ -46,6 +46,7 @@ function Search() {
     else {
       return (
         <Artist artist={artist}/>
+
       );
     }
 
