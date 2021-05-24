@@ -14,7 +14,7 @@ function Search() {
   const [recommendation, setRecommendation] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [choice, setChoice] = useState(false);
-  const [artist, setArtist] = useState({});
+  // const [artist, setArtist] = useState({});
 
   var data_obj = {
     name: " ",
@@ -24,25 +24,25 @@ function Search() {
   let listItems;
 
   
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      console.log(searchTerm);
+  // useEffect(() => {
+  //   const delayDebounceFn = setTimeout(() => {
+  //     console.log(searchTerm);
 
-      const get_artist = async() => {
-        const my_artist =  await getArtist(searchTerm);
-        setArtist(my_artist);
-        setChoice(true);
-        getRecommendation(artist.name);
-      }
-      if (searchTerm !== "") {
-        get_artist();
-      }
+  //     const get_artist = async() => {
+  //       const my_artist =  await getArtist(searchTerm);
+  //       setArtist(my_artist);
+  //       setChoice(true);
+  //       getRecommendation(artist.name);
+  //     }
+  //     if (searchTerm !== "") {
+  //       get_artist();
+  //     }
 
-    }, 3000);
+  //   }, 3000);
 
 
-    return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm, choice]);
+  //   return () => clearTimeout(delayDebounceFn);
+  // }, [searchTerm, choice]);
 
   async function getRecommendation(searchTerm) {
     try {
@@ -89,7 +89,14 @@ function Search() {
 
 // if(choice === false){
   let history = useHistory();
-  const handleOnClick = () => history.push('/results');
+  const handleOnClick = () => {
+    let artistToSearch = document.getElementById("artist-search").value;
+    console.log(artistToSearch);
+    history.push({
+      pathname: '/results', 
+      state: {detail: artistToSearch}
+    });
+  }
   return (
     <div className="container">
       {/* circle */}
@@ -100,7 +107,7 @@ function Search() {
             type="text"
             id="artist-search"
             placeholder="Search for an artist..."
-            onChange={e => setSearchTerm(e.target.value)}
+            // onChange={e => setSearchTerm(e.target.value)}
           />
           <input className="btn btn-primary" type="submit" value="search" onClick= {handleOnClick} />
         </label>

@@ -1,15 +1,13 @@
 import React, { Component } from "react";
+import { useLocation } from "react-router-dom";
  
-
-function Results() {
-
+const Results = props => {
+  const location = useLocation();
+  console.log(location.state.detail);
 
     return (
       <div>
-        <h2>GOT QUESTIONS?</h2>
-        <p>The easiest thing to do is post on
-        our <a href="http://forum.kirupa.com">forums</a>.
-        </p>
+        <h2>You selected: {location.state.detail}</h2>
       </div>
     );
   }
