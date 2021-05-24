@@ -10,7 +10,6 @@ const Results = props => {
   const location = useLocation();
   // console.log(location.state.detail);
   const searchTerm = location.state.detail;
-
   const [recommendation, setRecommendation] = useState(null);
   // const [searchTerm, setSearchTerm] = useState("");
   const [choice, setChoice] = useState(false);
@@ -68,6 +67,7 @@ const Results = props => {
   for (i = 0; i < 5; ++i) {
     data_obj.children.push({ name: recNames[i] });
   }
+  console.log(data_obj)
 
   if (choice === true) {
     return (

@@ -1,4 +1,5 @@
 import { getArtist } from "./spotifyFunctions";
+import "./artistSearch.css"
 
 const Artist = ({artist}) => {
 
@@ -13,12 +14,27 @@ const Artist = ({artist}) => {
     console.log(artist);
 
       return (
-            <div className = "container">
-                <div className = "root-artist-circle">
-                    <img src={artist.imageURL} width="100" height="100"/>
-                    {<h2>{artist.name}</h2>}
+          <div class="card card-flip">
+                <div class="card-front">
+                    <div class="card-body">
+                        <img src={artist.imageURL} class="card-img-top" alt="..."></img>
+                        <h3 class="card-title">{artist.name}</h3>
+                    </div>
+                  </div>
+                  <div class="card-back">
+                      <div class="card-body">
+                          <h3 class="card-title">back</h3>
+                       </div>
+                  </div>
                 </div>
-            </div>
+
+
+            // <div className = "container">
+            //     <div className = "root-artist-circle">
+            //         <img src={artist.imageURL} width="100" height="100"/>
+            //         {<h2>{artist.name}</h2>}
+            //     </div>
+            // </div>
       ); 
 }
    

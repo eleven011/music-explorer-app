@@ -45,6 +45,7 @@ function Force({ data }){
         // depth of node (depth 0 is root, depth 1 is first child)
         // plus a variety of other functions 
         const root = hierarchy(data.data);
+        console.log(data.data)
 
         // info from all the descendants 
         const nodeData = root.descendants();
@@ -60,6 +61,8 @@ function Force({ data }){
             .force("center", forceCenter(600 / 2, 600 / 2))
             .force("charge", forceManyBody().strength(-30))
             .force("collide", forceCollide(30))
+            .alphaDecay(0.01)
+            .alphaMin(0.002)
 
             // on "tick" callback function is triggered every time
             // force decays
@@ -147,8 +150,8 @@ function Force({ data }){
                 svg.on("mousemove", () => {
                     const [x, y] = mouse(svgRef.current);
                     simulation
-                        .force("x", forceX(x).strength(node => 0.15 + node.depth * 0.1))
-                        .force("y", forceY(y).strength(node => 0.15 + node.depth * 0.1))
+                        .force("x", forceX(x).strength(node => 0.1 + node.depth * 0.1))
+                        .force("y", forceY(y).strength(node => 0.1 + node.depth * 0.1))
 
                 });
 

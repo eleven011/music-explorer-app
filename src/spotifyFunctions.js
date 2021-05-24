@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { curveBasisOpen } from 'd3-shape';
 import qs from 'qs';
 import env from "react-dotenv";
 
@@ -18,7 +19,10 @@ export const getToken = async () =>  {
     
     const client_id = process.env.REACT_APP_CLIENT_ID;
     const client_secret = process.env.REACT_APP_CLIENT_SECRET;
-   
+    console.log('test1')
+    console.log(client_id)
+    console.log(client_secret)
+    console.log('test2')
     const headers = {
         headers: {
           Accept: 'application/json',
