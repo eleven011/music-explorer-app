@@ -27,13 +27,8 @@ function Force({ data }){
 
         // trying to figure out how to get rid of this
         svg
-<<<<<<< HEAD
             .attr("height", 600)
             .attr("width", 600)
-=======
-            .attr("height", 900)
-            .attr("width", 900)
->>>>>>> aaad55c25d9a5ee5d9d2d6ced4e5b57279f81a53
 
 
         // utility function from d3 (hierarchy).
@@ -132,14 +127,10 @@ function Force({ data }){
                     .attr("font-size", 10)
                     .text(node => node.data.name)
                     .attr("x", node => node.x)
-<<<<<<< HEAD
                     .attr("y", node => node.y)
                     // .on("click", function(d){
                     //     console.log(d.data.name);
                     // })
-=======
-                    .attr("y", node => node.y);
->>>>>>> af5c7830a557c29ccd4c030929ae063098c50a89
                 });
 
                 svg.on("mousemove", () => {

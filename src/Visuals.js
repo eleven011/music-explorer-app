@@ -34,10 +34,6 @@ function Visuals(data) {
   // console.log("Passed data: ", data);
 return (
   <React.Fragment>
-<<<<<<< HEAD
-    {/* <h2> Test Force Physics</h2> */}
-=======
->>>>>>> af5c7830a557c29ccd4c030929ae063098c50a89
     <Force data = {data} />
   </React.Fragment>
 )
