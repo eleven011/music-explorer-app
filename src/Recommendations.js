@@ -99,22 +99,15 @@ function Search() {
   }
   return (
     <div className="container">
-      {/* circle */}
       <div className="search-circle">
-        {/* <div className = "search-box"> */}
         <label for="artist-search">
           <input
             type="text"
             id="artist-search"
             placeholder="Search for an artist..."
-            // onChange={e => setSearchTerm(e.target.value)}
           />
           <input className="btn btn-primary" type="submit" value="search" onClick= {handleOnClick} />
         </label>
-        {/* </div> */}
-      </div>
-      <div>
-        {/* <Visuals data={data_obj} /> */}
       </div>
     </div>
 

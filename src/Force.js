@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { 
     select,
     mouse, 
@@ -18,6 +19,14 @@ function Force({ data }){
     const wrapperRef = useRef();
     //const dimensions = useResizeObserver(wrapperRef);
 
+
+    let history = useHistory();
+    const handleOnClick = (artist) => {
+        history.push({
+        pathname: '/results', 
+        state: {detail: artist}
+    });
+  }
     // useEffect hook
     useEffect(() => {
         //if(!dimensions) return;
@@ -78,6 +87,7 @@ function Force({ data }){
                     .data(nodeData)
                     .join("circle")
                     .attr("class", "node")
+                    .attr("fill", "white")
                     .attr("r", 15)
                     .attr("cx", node => node.x)
                     .attr("cy", node => node.y)
@@ -87,6 +97,7 @@ function Force({ data }){
                     })
                     .on("click", function(d){
                         console.log(d);
+                        handleOnClick(d.data.name);
                         //call function passing in d
                         //a wrapper for getRecommendation
                         // spotifyKickoff(d.data.name);
