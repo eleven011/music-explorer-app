@@ -10,6 +10,11 @@ function Search() {
       state: {detail: artistToSearch}
     });
   }
+  const handleOnEnter = (e) => {
+    if(e.keyCode === 13){
+      handleOnClick();
+    }
+  }
 
   return (
     <div className="container">
@@ -19,8 +24,10 @@ function Search() {
             type="text"
             id="artist-search"
             placeholder="Search for an artist..."
+            onKeyDown={handleOnEnter}
           />
           <input className="btn btn-primary" type="submit" value="search" onClick= {handleOnClick} />
+          
         </label>
       </div>
     </div>

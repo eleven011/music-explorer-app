@@ -21,7 +21,7 @@ class Main extends Component {
     return (
         <Router>
             <div>
-                <h1>Music Explorer</h1>
+              <h1><Link to="/">Music Explorer</Link></h1>
                     {/* {/* <ul className="header"> 
                         // <li><Link to="/">Home</Link></li>
                         // <li><Link to="/visuals">Visuals</Link></li>

@@ -21,13 +21,14 @@ const Results = props => {
   let listItems;
 
   useEffect(() => {
-    console.log(searchTerm);
+    // console.log(searchTerm);
 
     const get_artist = async() => {
       const my_artist =  await getArtist(searchTerm);
       setArtist(my_artist);
       setChoice(true);
       getRecommendation(artist.name);
+      console.log("ACTION");
     }
     if (searchTerm !== "") {
       get_artist();
@@ -44,7 +45,7 @@ const Results = props => {
           searchTerm
       );
       let data = await response.json();
-      console.log(data);
+      console.log("returned data", data);
       // console.log(base_url + "k=" + taste_dive_key + "&q=" + searchTerm);
       setRecommendation(data);
     } catch (error) {
@@ -65,7 +66,7 @@ const Results = props => {
   for (i = 0; i < 5; ++i) {
     data_obj.children.push({ name: recNames[i] });
   }
-  console.log(data_obj)
+  console.log("filled data: ", data_obj)
 
   if (choice === true) {
     return (
