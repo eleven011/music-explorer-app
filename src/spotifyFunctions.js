@@ -77,31 +77,46 @@ export const getArtistID = async (artistName) => {
         return new Promise ((resolve, reject) => {
             resolve(response.data.artists.items[0]);
         })
-
     } catch (error) {
         console.log(error);
     }
 }
 
-// after retrieving artist id,
-// get all data on that artist
-// kind of making an api call twice tho....
-// might be better to just take index 0 of results from
-// above function and be happy with that?
+export const getTrack = async (id) => {
+    let my_token = await getToken();
+    let track_URL = 'https://api.spotify.com/v1/artists/' + id + '/top-tracks';
+    try {
+        const response = await axios({
+            headers: {  
+                "Authorization": `Bearer ${my_token}`,
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            method: 'GET',
+            url: track_URL,
+            params: {
+                market: 'US',
+            },
+        });
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
-// response -> artists -> items -> index 0
-// then to: array of genres, popularity,
-// images array -> each index has height, width, and url
 export const getArtist = async (artistName) => {
     let artistData = await getArtistID(artistName);
+    // let artistId = artistData.id;
+    // let previewURL = await getTrack(artistId);
 
-    console.log(artistData);
 
     const artist = {
         name: artistData.name,
         genres: artistData.genres,
         popularity: artistData.popularity,
         imageURL: artistData.images[0].url,
+        // previewURL: previewURL
     }
 
     return artist;
