@@ -10,8 +10,8 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Search from "./Home";
-import Visuals from "./Visuals";
+// import Search from "./Home";
+// import Visuals from "./Visuals";
 import Results from "./Results"; 
 import Recommendations from "./Recommendations";
 
@@ -22,17 +22,16 @@ class Main extends Component {
         <Router>
             <div>
                 <h1>Music Explorer</h1>
-                    <ul className="header">
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/visuals">Visuals</Link></li>
-                        <li><Link to="/recommendations">Recs</Link></li>
-                    </ul>
+                    {/* {/* <ul className="header"> 
+                        // <li><Link to="/">Home</Link></li>
+                        // <li><Link to="/visuals">Visuals</Link></li>
+                        // <li><Link to="/recommendations">Recs</Link></li>
+                    </ul> */}
                 <div className="content">
                   <Switch>
-                    <Route exact path="/" component={Search}/>
-                    <Route path="/visuals" component={Visuals}/>
-                    <Route path="/recommendations" component={Recommendations}/>
-                    {/* <Route path='/results' render={() => <Results artistName={artistName} />}/> */}
+                    {/* <Route exact path="/" component={Search}/>
+                    <Route path="/visuals" component={Visuals}/> */}
+                    <Route exact path="/" component={Recommendations}/>
                     <Route path='/results' render={(props) => <Results {...props} /> }/>
                     </Switch>
                 </div>

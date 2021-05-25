@@ -8,10 +8,8 @@ import{base_url} from "./constants";
  
 const Results = props => {
   const location = useLocation();
-  // console.log(location.state.detail);
   const searchTerm = location.state.detail;
   const [recommendation, setRecommendation] = useState(null);
-  // const [searchTerm, setSearchTerm] = useState("");
   const [choice, setChoice] = useState(false);
   const [artist, setArtist] = useState({});
 

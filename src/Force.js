@@ -19,7 +19,6 @@ function Force({ data }){
     const wrapperRef = useRef();
     //const dimensions = useResizeObserver(wrapperRef);
 
-
     let history = useHistory();
     const handleOnClick = (artist) => {
         history.push({
@@ -67,7 +66,6 @@ function Force({ data }){
             // on "tick" callback function is triggered every time
             // force decays
 
-
             .on("tick", () => {
                 // inside "tick", render nodes/links/circles
 
@@ -95,15 +93,12 @@ function Force({ data }){
                     .attr("cx", node => node.x)
                     .attr("cy", node => node.y)
                     .on("mouseover", function(d){
-                        console.log(d.data.name);
-                        //call spotify function
+
+
                     })
                     .on("click", function(d){
-                        console.log(d);
                         handleOnClick(d.data.name);
-                        //call function passing in d
-                        //a wrapper for getRecommendation
-                        // spotifyKickoff(d.data.name);
+
                     })
                     .on("dblclick", dblclick)
                     .call(drag()
@@ -142,9 +137,7 @@ function Force({ data }){
                     .text(node => node.data.name)
                     .attr("x", node => node.x)
                     .attr("y", node => node.y)
-                    // .on("click", function(d){
-                    //     console.log(d.data.name);
-                    // })
+
                 });
 
                 svg.on("mousemove", () => {

@@ -1,12 +1,5 @@
 import axios from 'axios';
-import { curveBasisOpen } from 'd3-shape';
 import qs from 'qs';
-import env from "react-dotenv";
-
-
-// NOTE TO VIVIAN!!!
-// api calls have issue on your browser unless
-// it's incognito mode
 
 
 // steps for making api call w/ Spotify
