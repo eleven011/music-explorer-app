@@ -23,7 +23,7 @@ const Results = props => {
   //   name: searchTerm,
   //   children: []
   // };
-  let recNames = [" ", " ", " ", " ", " "];
+  let recNames = [];
 
   useEffect(() => {
     // console.log(searchTerm);
@@ -85,21 +85,30 @@ function fillGraph(recommendation) {
     console.log("recommendation is: ", recommendation);
     if (recommendation.Similar === undefined) {
       for (var i = 0; i < 5; ++i) {
-        recNames.push(" ");
+        recNames.push({"name": ""});
       }
     } else {
       for (var i = 0; i < 5; ++i) {
-        recNames.push(recommendation.Similar.Results[i].Name);
+        recNames.push({"name": recommendation.Similar.Results[i].Name});
       }
     }
-    for (i = 0; i < 5; ++i) {
-      // data_obj.children.push({ name: recNames[i] });
-      let hold = data_obj;
-      hold.children.push({ name: recNames[i] });
 
-      setData_obj(hold);
+    // {Name: "hello1"}, {Name: "hello2"}, {Name: "hello3"}, {Name: "hello4"}, {Name: "hello5"}
 
-    }
+    // for (i = 0; i < 5; ++i) {
+    //   // data_obj.children.push({ name: recNames[i] });
+    //   let hold = data_obj;
+    //   console.log("hold is: ", hold);
+    //   hold.children.push({ name: recNames[i] });
+
+    //   setData_obj(hold);
+
+    // }
+    console.log("recNames: ", recNames);
+    let hold = data_obj;
+    hold.children = [...recNames];
+    setData_obj(hold);
+
     console.log("fillGraph is being called");
     console.log("filled data: ", data_obj);
   }
