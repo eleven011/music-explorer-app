@@ -8,6 +8,7 @@ import {
     forceCenter, 
     forceManyBody, 
     forceCollide,
+    forceLink,
     forceX,
     forceY,
     drag
@@ -33,18 +34,19 @@ function Force({ data }){
         // ref svgRef to set the width + height
         const svg = select(svgRef.current);
 
+        const height = 600;
+        const width = 600;
+
         // trying to figure out how to get rid of this
         svg
-            .attr("height", 600)
-            .attr("width", 600)
-
+            .attr("height", height)
+            .attr("width", width);
 
         // utility function from d3 (hierarchy).
         // flattens tree. This contains data info +
         // depth of node (depth 0 is root, depth 1 is first child)
         // plus a variety of other functions 
         const root = hierarchy(data);
-        console.log("The data passed to force.js: ", data)
 
         // info from all the descendants 
         const nodeData = root.descendants();
@@ -57,117 +59,183 @@ function Force({ data }){
         // see more: https://github.com/d3/d3-force
 
         const simulation = forceSimulation(nodeData)
-            .force("center", forceCenter(600 / 2, 600 / 2))
-            .force("charge", forceManyBody().strength(-30))
+            .force("center", forceCenter(height / 2, width / 2))
+            .nodes(nodeData)
+            .force("charge", forceManyBody().strength(-1000))
             .force("collide", forceCollide(30))
-            .alphaDecay(0.01)
-            .alphaMin(0.002)
+            .force("link", forceLink(linkData).distance(120))
+            .force("x", forceX(width / 2).strength(0.2))
+            .force("y", forceY(height / 2).strength(0.2))
+
+        const link = svg.selectAll(".link")
+            .data(linkData)
+            .join("line")
+            .attr("class", "link")
+            .attr("stroke", "black")
+            .attr("fill", "none")
+            .attr("x1", link => link.source.x)
+            .attr("y1", link => link.source.y)
+            .attr("x2", link => link.target.x)
+            .attr("y2", link => link.target.y);
+        
+        const node = svg.selectAll(".node")
+            .data(nodeData)
+            .join("svg:g")
+            .attr("class", "node")
+            .on("click", function(d){
+                handleOnClick(d.data.name)
+            })
+            
+        
+        node.append("circle")
+            .attr("fill", "white")
+            .attr("r", 15)
+            .attr("cx", node => node.x)
+            .attr("cy", node => node.y)
+           
+
+        node.append("text")
+            .data(nodeData)
+            .attr("class", "label")
+            .attr("text-anchor", "end")
+            .attr("font-size", 10)
+            .text(node => node.data.name)
+            .attr("x", node => node.x)
+            .attr("y", node => node.y);
+
+               // svg
+                //     .selectAll(".label")
+                //     .data(nodeData)
+                //     .join("text")
+                //     .attr("class", "label")
+                //     .attr("text-anchor", "end")
+                //     .attr("font-size", 10)
+                //     .text(node => node.data.name)
+                //     .attr("x", node => node.x)
+                //     .attr("y", node => node.y)
+
+
+        simulation.on("tick", function() {
+            link.attr("x1", link => link.source.x)
+                .attr("y1", link => link.source.y)
+                .attr("x2", link => link.target.x)
+                .attr("y2", link => link.target.y)
+
+            node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+            simulation.restart();
+        })
+
+
+
 
             // on "tick" callback function is triggered every time
             // force decays
 
-            .on("tick", () => {
+            // .on("tick", () => {
                 // inside "tick", render nodes/links/circles
 
                 // set up the links
-                svg
-                    .selectAll(".link")
-                    .data(linkData)
-                    .join("line")
-                    .attr("class", "link")
-                    .attr("stroke", "black")
-                    .attr("fill", "none")
-                    .attr("x1", link => link.source.x)
-                    .attr("y1", link => link.source.y)
-                    .attr("x2", link => link.target.x)
-                    .attr("y2", link => link.target.y);
+                // svg
+                //     .selectAll(".link")
+                //     .data(linkData)
+                //     .join("line")
+                //     .attr("class", "link")
+                //     .attr("stroke", "black")
+                //     .attr("fill", "none")
+                //     .attr("x1", link => link.source.x)
+                //     .attr("y1", link => link.source.y)
+                //     .attr("x2", link => link.target.x)
+                //     .attr("y2", link => link.target.y);
             
-                // render the nodes
-                svg
-                    .selectAll(".node")
-                    .data(nodeData)
-                    .join("circle")
-                    .attr("class", "node")
-                    .attr("fill", "white")
-                    .attr("r", 15)
-                    .attr("cx", node => node.x)
-                    .attr("cy", node => node.y)
-                    .on("mouseover", function(d){
+                // // render the nodes
+                // svg
+                //     .selectAll(".node")
+                //     .data(nodeData)
+                //     .join("circle")
+                //     .attr("class", "node")
+                //     .attr("fill", "white")
+                //     .attr("r", 15)
+                //     .attr("cx", node => node.x)
+                //     .attr("cy", node => node.y)
+                //     .on("mouseover", function(d,i,nodes){
+                //         console.log(nodes);
+                //         select(nodes[i])
+                //             .style("stroke", "green");
+                //     })
 
+                //     .on("click", function(d){
+                //         handleOnClick(d.data.name);
 
-                    })
-                    .on("click", function(d){
-                        handleOnClick(d.data.name);
-
-                    })
-                    .on("dblclick", dblclick)
-                    .call(drag()
-                        .on('start', dragStart)
-                        .on('drag', dragging)
-                        .on('end', dragEnd)
-                      )
+                //     })
+                //     .on("dblclick", dblclick)
+                //     .call(drag()
+                //         .on('start', dragStart)
+                //         .on('drag', dragging)
+                //         .on('end', dragEnd)
+                //       )
                   
-                    function dragStart(d,i,nodes){
-                        select(nodes[i])
-                          .style("stroke", "red")  
-                      }
+                //     function dragStart(d,i,nodes){
+                //         select(nodes[i])
+                //           .style("stroke", "red")  
+                //       }
                       
-                    function dragging(d,i,nodes){
-                        let [xCoor, yCoor] = mouse(svgRef.current)
-                        console.log(select(nodes[i]))
-                        select(nodes[i])
-                          .attr("cx", xCoor)
-                          .attr("cy", yCoor)
-                      }
+                //     function dragging(d,i,nodes){
+                //         let [xCoor, yCoor] = mouse(svgRef.current)
+                //         console.log(select(nodes[i]))
+                //         select(nodes[i])
+                //           .attr("cx", xCoor)
+                //           .attr("cy", yCoor)
+                //       }
                       
-                      function dragEnd(d,i,nodes){
-                         select(nodes[i])
-                          .style("stroke", "black")
-                      }
+                //       function dragEnd(d,i,nodes){
+                //          select(nodes[i])
+                //           .style("stroke", "black")
+                //       }
+
                 
                 
-                // set up the band labels
-                svg
-                    .selectAll(".label")
-                    .data(nodeData)
-                    .join("text")
-                    .attr("class", "label")
-                    .attr("text-anchor", "end")
-                    .attr("font-size", 10)
-                    .text(node => node.data.name)
-                    .attr("x", node => node.x)
-                    .attr("y", node => node.y)
+                // // set up the band labels
+                // svg
+                //     .selectAll(".label")
+                //     .data(nodeData)
+                //     .join("text")
+                //     .attr("class", "label")
+                //     .attr("text-anchor", "end")
+                //     .attr("font-size", 10)
+                //     .text(node => node.data.name)
+                //     .attr("x", node => node.x)
+                //     .attr("y", node => node.y)
 
-                });
+                // });
 
-                svg.on("mousemove", () => {
-                    const [x, y] = mouse(svgRef.current);
-                    simulation
-                        .force("x", forceX(x).strength(node => 0.1 + node.depth * 0.1))
-                        .force("y", forceY(y).strength(node => 0.1 + node.depth * 0.1))
+                // svg.on("mousemove", () => {
+                //     const [x, y] = mouse(svgRef.current);
+                //     simulation
+                //         .force("x", forceX(x).strength(node => 0.1 + node.depth * 0.1))
+                //         .force("y", forceY(y).strength(node => 0.1 + node.depth * 0.1))
 
-                });
+                // });
 
-                function click() {
-                    svg.select("circle").transition()
-                    //svg.selectAll("circle").transition()
-                        .duration(750)
-                        .attr("r", 100)
-                        .style("fill", "lightsteelblue");
-                    svg.select("text").transition()
-                        .duration(750)
-                        .attr("font-size", 16)
-                }
+                // function click() {
+                //     svg.select("circle").transition()
+                //     //svg.selectAll("circle").transition()
+                //         .duration(750)
+                //         .attr("r", 100)
+                //         .style("fill", "lightsteelblue");
+                //     svg.select("text").transition()
+                //         .duration(750)
+                //         .attr("font-size", 16)
+                // }
 
-                function dblclick() {
-                    svg.select("circle").transition()
-                        .duration(750)
-                        .attr("r", 12)
-                        .style("fill", "white");
-                    svg.select("text").transition()
-                        .duration(750)
-                        .attr("font-size", 12)
-                }
+                // function dblclick() {
+                //     svg.select("circle").transition()
+                //         .duration(750)
+                //         .attr("r", 12)
+                //         .style("fill", "white");
+                //     svg.select("text").transition()
+                //         .duration(750)
+                //         .attr("font-size", 12)
+                // }
             
 
     }, [data]); // any time the data or dimensions change this is called again
