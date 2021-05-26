@@ -3,19 +3,19 @@ import "./artistSearch.css"
 
 const Artist = ({artist}) => {
 
-    console.log(artist);
+    // console.log(artist);
 
       return (
-          <div class="card card-flip">
-                <div class="card-front">
-                    <div class="card-body">
-                        <img src={artist.imageURL} class="card-img-top" alt="..."></img>
-                        <h3 class="card-title">{artist.name}</h3>
+          <div className="card card-flip">
+                <div className="card-front">
+                    <div className="card-body">
+                        <img src={artist.imageURL} className="card-img-top" alt="..."></img>
+                        <h3 className="card-title">{artist.name}</h3>
                     </div>
                   </div>
-                  <div class="card-back">
-                      <div class="card-body">
-                          <h3 class="card-title">back</h3>
+                  <div className="card-back">
+                      <div className="card-body">
+                          <h3 className="card-title">back</h3>
                        </div>
                   </div>
                 </div>

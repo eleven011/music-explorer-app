@@ -12,10 +12,10 @@ export const getToken = async () =>  {
     
     const client_id = process.env.REACT_APP_CLIENT_ID;
     const client_secret = process.env.REACT_APP_CLIENT_SECRET;
-    console.log('test1')
-    console.log(client_id)
-    console.log(client_secret)
-    console.log('test2')
+    // console.log('test1')
+    // console.log(client_id)
+    // console.log(client_secret)
+    // console.log('test2')
     const headers = {
         headers: {
           Accept: 'application/json',
@@ -37,7 +37,7 @@ export const getToken = async () =>  {
             qs.stringify(data),
             headers
         );
-        console.log(response.data.access_token);
+        // console.log(response.data.access_token);
         return response.data.access_token;
     } catch (error) {
         console.log(error);
@@ -91,7 +91,7 @@ export const getTrack = async (id) => {
                 market: 'US',
             },
         });
-        console.log(response.data);
+        // console.log(response.data);
         return response.data;
     } catch (error) {
         console.log(error);

@@ -19,7 +19,7 @@ function Search() {
   return (
     <div className="container">
       <div className="search-circle">
-        <label for="artist-search">
+        <label htmlFor="artist-search">
           <input
             type="text"
             id="artist-search"
