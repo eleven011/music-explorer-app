@@ -11,15 +11,18 @@ import {
     forceLink,
     forceX,
     forceY,
-    drag
+    //drag,
+    //transition
 } from "d3";
-import useResizeObserver from "./useResizeObserver";
+//import useResizeObserver from "./useResizeObserver";
 import "./Force.css";
+
 
 function Force({ data }){
     const svgRef = useRef();
     const wrapperRef = useRef();
-    const dimensions = useResizeObserver(wrapperRef);
+    //const dimensions = useResizeObserver(wrapperRef);
+
     let history = useHistory();
     const handleOnClick = (artist) => {
         console.log("ARTIST")
@@ -29,16 +32,18 @@ function Force({ data }){
         state: {detail: artist}
     });
   }
+  //
+
+  console.log("data", data)
+
     // useEffect hook
     useEffect(() => {
         //if(!dimensions) return;
         // ref svgRef to set the width + height
         const svg = select(svgRef.current);
-        //
 
         const height = 492;
         const width = 600;
-
 
         // trying to figure out how to get rid of this
         svg
@@ -71,7 +76,6 @@ function Force({ data }){
             .force("x", forceX(width / 2).strength(0.2))
             .force("y", forceY(height / 2).strength(0.2))
 
-            //
         const link = svg.selectAll(".link")
             .data(linkData)
             .join("line")
@@ -83,7 +87,7 @@ function Force({ data }){
             .attr("x1", link => link.source.x)
             .attr("y1", link => link.source.y)
             .attr("x2", link => link.target.x)
-            .attr("y2", link => link.target.y);
+            .attr("y2", link => link.target.y)
             //
         
         const node = svg.selectAll(".node")
@@ -95,14 +99,31 @@ function Force({ data }){
             .on("click", function(d){
                 handleOnClick(d.data.name)
             })
+            .on("mouseover", function(d){
+                select(this).select("circle").transition()
+                    .attr("r", 40)
+                    .duration(750)
+            })
+            .on("mouseout", function(d){
+                select(this).select("circle").transition()
+                .attr("r", 15)
+                .duration(750)
+            })
 
-        node.append("circle")
+            //
+        const circles = node.append("circle")
+        //node.append("circle")
             .attr("fill", "white")
             .attr("r", 18)
-            .attr("cx", node => node.x)
-            .attr("cy", node => node.y)
+            //.attr("cx", node => node.x)
+            //.attr("cy", node => node.y)
+            .attr("cx", 10)
+            .attr("cy", 10)
+            .attr("x", -(15/7))
+            .attr("y", -(15/7))
+            .style("stroke", "black")
 
-        node.append("text")
+        const texts = node.append("text")
             .data(nodeData)
             .attr("class", "label")
             //.attr("text-anchor", "end")
@@ -110,6 +131,12 @@ function Force({ data }){
             .text(node => node.data.name)
             .attr("x", node => node.x)
             .attr("y", node => node.y);
+
+        
+        //texts.exit().remove();
+        //circles.exit().remove();
+        //node.exit().remove();
+
 
                // svg
                 //     .selectAll(".label")
@@ -121,7 +148,7 @@ function Force({ data }){
                 //     .text(node => node.data.name)
                 //     .attr("x", node => node.x)
                 //     .attr("y", node => node.y)
-
+                //
 
         simulation.on("tick", function() {
             link.attr("x1", link => link.source.x)
@@ -139,7 +166,6 @@ function Force({ data }){
                   .force("x", forceX(x).strength(node => 0.1 + node.depth * 0.02))
                   .force("y", forceY(y).strength(node => 0.1 + node.depth * 0.02))
         })
-
 
 
 
@@ -241,6 +267,7 @@ function Force({ data }){
                 //         .duration(750)
                 //         .attr("font-size", 16)
                 // }
+                //
 
                 // function dblclick() {
                 //     svg.select("circle").transition()

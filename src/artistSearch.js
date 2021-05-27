@@ -1,4 +1,4 @@
-import { getArtist } from "./spotifyFunctions";
+//import { getArtist } from "./spotifyFunctions";
 import "./artistSearch.css"
 
 const Artist = ({artist}) => {

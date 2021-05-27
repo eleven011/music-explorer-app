@@ -19,6 +19,7 @@ function Search() {
   }
 
   return (
+<<<<<<< HEAD
     <div className="card">
       <div className="search">
       <label htmlFor="artist-search">
@@ -33,14 +34,50 @@ function Search() {
         <br></br>
         <label htmlFor="num-recs"> 
             <input
+=======
+    <div className="container">
+      <div className="split left">
+        <div className="centered">
+          <h2 className="welcome">Welcome to Music Explorer</h2>
+          <br></br>
+          <p className="helpful">Enter the band name you would like to see recommendations of</p>
+      </div>
+      </div>
+      
+      <div className="split right">
+        <div className="centered">
+          <div className="search-circle">
+            <div className="artist-search">
+              <label htmlFor="artist-search">
+              <input
+              type="text"
+              id="artist-search"
+              placeholder="Search for an artist..."
+              onKeyDown={handleOnEnter}/>
+              </label>
+              <label htmlFor="num-recs"> 
+              <input
+>>>>>>> 6f1c40d27a8f8b46d7f1b225786d5f09156b3674
               id="num-recs"
               type="number"
               min="1" 
               max="10"
+<<<<<<< HEAD
               placeholder="# of recs"
             />
         </label>
         </div>
+=======
+              placeholder="# of recs"/>
+              </label>
+              <div>
+              <input className="btn btn-primary" type="submit" value="Explore!" onClick= {handleOnClick} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+>>>>>>> 6f1c40d27a8f8b46d7f1b225786d5f09156b3674
     </div>
 
 
