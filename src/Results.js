@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+//import React, { Component } from "react";
 import { useLocation } from "react-router-dom";
 import Force from "./Force";
 import Artist from "./artistSearch";

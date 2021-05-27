@@ -1,11 +1,7 @@
-.site-title {
-  text-align: center;
-  vertical-align: middle;
+h1.site-title {
+  left: 40%;
   padding: 10px;
-  display: flex;
-  margin-left: 50%;
   position: fixed;
-  display: inline-block;
   color: royalblue;
   overflow: hidden;
   background: linear-gradient(
@@ -19,7 +15,7 @@
   -webkit-text-fill-color: transparent;
   background-size: 200% 100%;
   background-position: 100%;
-  transition: background-position 400ms ease;
+  transition: background-position 500ms ease;
 }
 
 .site-title:hover {

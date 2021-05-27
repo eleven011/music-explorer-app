@@ -4,3 +4,95 @@
   min-width: 700px;
   min-height: 700px;
 }
+
+.a {
+  z-index: 1;
+}
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+  background-color: black;
+}
+
+.right {
+  right: 0;
+}
+
+#artist-search {
+  border-radius: 10px;
+  max-width: 170px;
+  margin-right: 2px;
+}
+
+.btn {
+  background-color: rgba(255, 255, 255, 0.15);
+  border: white;
+}
+
+.btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(200px);
+}
+
+#num-recs {
+  border-radius: 10px;
+  max-width: 85px;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.centered .search-circle {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(100px);
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 2s;
+  animation-delay: 2s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+.welcome {
+  color: white;
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 2s;
+}
+
+.helpful {
+  color: white;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

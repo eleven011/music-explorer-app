@@ -16,7 +16,7 @@ import Results from "./Results";
 import Recommendations from "./Recommendations";
 import "./Main.css";
 
-let artistName = "test";
+//let artistName = "test";
 class Main extends Component {
   render() {
     return (
