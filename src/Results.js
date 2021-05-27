@@ -10,6 +10,11 @@ import "./Results.css";
 const Results = props => {
   const location = useLocation();
   const searchTerm = location.state.detail;
+  let numRecs = location.state.number;
+  console.log("NUMRECS:", numRecs);
+  if(numRecs === ''){
+    numRecs = 5;
+  }
   // const [recommendation, setRecommendation] = useState({});
   const [choice, setChoice] = useState(false);
   const [artist, setArtist] = useState({});
@@ -50,7 +55,9 @@ const Results = props => {
           "k=" +
           process.env.REACT_APP_TASTEDIVE_KEY +
           "&q=" +
-          searchTerm
+          searchTerm +
+          "&limit="+
+          numRecs
       )
         .then(response => response.json())
         .then(data => {
@@ -84,11 +91,11 @@ function fillGraph(recommendation) {
     // let recommendation = await getRecommendation(searchTerm);
     console.log("recommendation is: ", recommendation);
     if (recommendation.Similar === undefined) {
-      for (var i = 0; i < 5; ++i) {
+      for (var i = 0; i < numRecs; ++i) {
         recNames.push({"name": ""});
       }
     } else {
-      for (var i = 0; i < 5; ++i) {
+      for (var i = 0; i < numRecs; ++i) {
         recNames.push({"name": recommendation.Similar.Results[i].Name});
       }
     }
@@ -96,6 +103,7 @@ function fillGraph(recommendation) {
     // {Name: "hello1"}, {Name: "hello2"}, {Name: "hello3"}, {Name: "hello4"}, {Name: "hello5"}
 
     //
+ 
     // for (i = 0; i < 5; ++i) {
     //   // data_obj.children.push({ name: recNames[i] });
     //   let hold = data_obj;

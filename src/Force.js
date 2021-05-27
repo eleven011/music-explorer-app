@@ -32,7 +32,6 @@ function Force({ data }){
     // useEffect hook
     useEffect(() => {
         //if(!dimensions) return;
-
         // ref svgRef to set the width + height
         const svg = select(svgRef.current);
         //

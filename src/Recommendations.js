@@ -4,10 +4,12 @@ function Search() {
   let history = useHistory();
   const handleOnClick = () => {
     let artistToSearch = document.getElementById("artist-search").value;
+    let numRecs = document.getElementById("num-recs").value;
     console.log(artistToSearch);
     history.push({
       pathname: '/results', 
-      state: {detail: artistToSearch}
+      state: {detail: artistToSearch,
+              number: numRecs}
     });
   }
   const handleOnEnter = (e) => {
@@ -27,7 +29,15 @@ function Search() {
             onKeyDown={handleOnEnter}
           />
           <input className="btn btn-primary" type="submit" value="search" onClick= {handleOnClick} />
-          
+        </label>
+        <label htmlFor="num-recs"> 
+            <input
+              id="num-recs"
+              type="number"
+              min="1" 
+              max="10"
+              placeholder="# of recs"
+            />
         </label>
       </div>
     </div>
