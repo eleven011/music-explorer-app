@@ -15,7 +15,7 @@ const Artist = ({artist}) => {
                   </div>
                   <div className="card-back">
                       <div className="card-body">
-                          <h3 className="card-title">back</h3>
+                          <h3 className="card-title">{artist.genres}</h3>
                        </div>
                   </div>
                 </div>

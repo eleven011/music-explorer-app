@@ -5,7 +5,7 @@ import Artist from "./artistSearch";
 import { getArtist } from "./spotifyFunctions";
 import {useEffect, useState } from "react";
 import{base_url} from "./constants";
-
+import "./Results.css";
  
 const Results = props => {
   const location = useLocation();
@@ -42,7 +42,7 @@ const Results = props => {
     if (searchTerm !== "" && choice === false) {
       get_artist();
     }
-  }, [choice, artist, data_obj]);
+  }, [choice, artist, data_obj, searchTerm]);
 
   async function getRecommendation(searchTerm) {
       fetch(
@@ -95,6 +95,7 @@ function fillGraph(recommendation) {
 
     // {Name: "hello1"}, {Name: "hello2"}, {Name: "hello3"}, {Name: "hello4"}, {Name: "hello5"}
 
+    //
     // for (i = 0; i < 5; ++i) {
     //   // data_obj.children.push({ name: recNames[i] });
     //   let hold = data_obj;

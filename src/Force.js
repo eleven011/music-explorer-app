@@ -13,15 +13,17 @@ import {
     forceY,
     drag
 } from "d3";
-//import useResizeObserver from "./useResizeObserver";
+import useResizeObserver from "./useResizeObserver";
+import "./Force.css";
 
 function Force({ data }){
     const svgRef = useRef();
     const wrapperRef = useRef();
-    //const dimensions = useResizeObserver(wrapperRef);
-
+    const dimensions = useResizeObserver(wrapperRef);
     let history = useHistory();
     const handleOnClick = (artist) => {
+        console.log("ARTIST")
+        console.log(artist)
         history.push({
         pathname: '/results', 
         state: {detail: artist}
@@ -33,9 +35,11 @@ function Force({ data }){
 
         // ref svgRef to set the width + height
         const svg = select(svgRef.current);
+        //
 
-        const height = 600;
+        const height = 492;
         const width = 600;
+
 
         // trying to figure out how to get rid of this
         svg
@@ -47,6 +51,7 @@ function Force({ data }){
         // depth of node (depth 0 is root, depth 1 is first child)
         // plus a variety of other functions 
         const root = hierarchy(data);
+
 
         // info from all the descendants 
         const nodeData = root.descendants();
@@ -67,38 +72,42 @@ function Force({ data }){
             .force("x", forceX(width / 2).strength(0.2))
             .force("y", forceY(height / 2).strength(0.2))
 
+            //
         const link = svg.selectAll(".link")
             .data(linkData)
             .join("line")
             .attr("class", "link")
             .attr("stroke", "black")
             .attr("fill", "none")
+            .attr("viewBox", "0 -5 10 10")
+            .attr("orient", "auto")
             .attr("x1", link => link.source.x)
             .attr("y1", link => link.source.y)
             .attr("x2", link => link.target.x)
             .attr("y2", link => link.target.y);
+            //
         
         const node = svg.selectAll(".node")
             .data(nodeData)
             .join("svg:g")
-            .attr("class", "node")
+            .classed("node", true)
+            .classed("fixed", d => d.fx !== undefined)
+            //.attr("class", "node")
             .on("click", function(d){
                 handleOnClick(d.data.name)
             })
-            
-        
+
         node.append("circle")
             .attr("fill", "white")
-            .attr("r", 15)
+            .attr("r", 18)
             .attr("cx", node => node.x)
             .attr("cy", node => node.y)
-           
 
         node.append("text")
             .data(nodeData)
             .attr("class", "label")
-            .attr("text-anchor", "end")
-            .attr("font-size", 10)
+            //.attr("text-anchor", "end")
+            .attr("x", 15)
             .text(node => node.data.name)
             .attr("x", node => node.x)
             .attr("y", node => node.y);
@@ -122,7 +131,14 @@ function Force({ data }){
                 .attr("y2", link => link.target.y)
 
             node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-            simulation.restart();
+            simulation.alpha(1).restart();
+        })
+
+        svg.on("mousemove", () => {
+              const [x, y] = mouse(svgRef.current);
+              simulation
+                  .force("x", forceX(x).strength(node => 0.1 + node.depth * 0.02))
+                  .force("y", forceY(y).strength(node => 0.1 + node.depth * 0.02))
         })
 
 

@@ -1,0 +1,27 @@
+.site-title {
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px;
+  display: flex;
+  margin-left: 50%;
+  position: fixed;
+  display: inline-block;
+  color: royalblue;
+  overflow: hidden;
+  background: linear-gradient(
+    to right,
+    midnightblue,
+    midnightblue 50%,
+    royalblue 50%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  background-position: 100%;
+  transition: background-position 400ms ease;
+}
+
+.site-title:hover {
+  background-position: 0 100%;
+}
