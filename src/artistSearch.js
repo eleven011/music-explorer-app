@@ -1,5 +1,5 @@
 //import { getArtist } from "./spotifyFunctions";
-import "./artistSearch.css"
+import "./artistSearch.css";
 import YouTube from "react-youtube";
 
 const Artist = ({artist}) => {

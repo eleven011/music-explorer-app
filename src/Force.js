@@ -24,7 +24,8 @@ function Force({ data }){
     const handleOnClick = (artist) => {
         history.push({
         pathname: '/results', 
-        state: {detail: artist}
+        state: {detail: artist,
+                 number: 5}
     });
   }
     // useEffect hook

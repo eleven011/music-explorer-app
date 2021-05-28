@@ -68,11 +68,13 @@ function Search() {
       recNames.push(" ");
     }
   } else {
+    console.log("data", recommendation.Similar.Info);
     for (var i = 0; i < 5; ++i) {
       recNames.push(recommendation.Similar.Results[i].Name);
     }
   }
 
+  // const youtubeID = recommendation.Info.yID;
   listItems = recNames.map(name => <li>{name}</li>);
 
   // now gotta figure out how to read that info into an object for Kevin:)
