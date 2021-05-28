@@ -1,5 +1,6 @@
 //import { getArtist } from "./spotifyFunctions";
 import "./artistSearch.css"
+import YouTube from "react-youtube";
 
 const Artist = ({artist}) => {
 
@@ -14,9 +15,16 @@ const Artist = ({artist}) => {
                     </div>
                   </div>
                   <div className="card-back">
-                      <div className="card-body">
+                       <div className="card-body">
                           <h3 className="card-title">{artist.genres}</h3>
                        </div>
+                    <div>
+                    <YouTube
+                    className="youtube-player"
+                    videoId="or6Ixeplex4"/>
+                    </div>
+
+                     
                   </div>
                 </div>
       ); 

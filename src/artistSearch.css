@@ -10,6 +10,7 @@
 
 .card-front {
   transform: rotateY(0deg);
+
 }
 
 .card-back {
@@ -17,6 +18,12 @@
   position: absolute;
   top: 0;
   border: 1px solid black;
+}
+
+.card > .card-back{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .card-flip:hover .card-front {
@@ -36,4 +43,14 @@
 .card-body {
   object-fit: contain;
   width: 100%;
+}
+
+.youtube-player{
+  height: 150px;
+  width: 300px;
+  /* autoplay: 1; */
+}
+
+.card-front .youtube-player{
+  visibility: hidden;
 }

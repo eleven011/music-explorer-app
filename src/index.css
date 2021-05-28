@@ -1,12 +1,4 @@
-*{
-  margin: 0;
-  padding: 0;
-}
-
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 20s ease infinite;
@@ -66,15 +58,12 @@ body {
 }
 */
 
-<<<<<<< HEAD
-=======
 .search-circle.search-box {
   text-align: center;
   width: 150px;
   height: 50px;
   top: 100px;
 }
->>>>>>> 6f1c40d27a8f8b46d7f1b225786d5f09156b3674
 
 .container {
   display: flex;
@@ -84,30 +73,4 @@ body {
 input[type="text"] {
   height: 20px;
   padding: 5px;
-}
-
-.card{
-  display: flex;
-  position: relative;
-  width: 18rem;
-  height: 20rem;
-  background: lightblue;
-  overflow:hidden;
-}
-
-.search{
-  position: absolute;
-  margin-top: 50px;
-  text-align: center;
-  z-index: 1;
-}
-
-
-.search-box {
-  position: relative;
-  text-align: center;
-  width: 150px;
-  height: 50px;
-  border: 1px solid black;
-  opacity: 0.5;
 }

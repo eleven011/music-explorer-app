@@ -1,6 +1,6 @@
-//import React, { Component } from "react";
+import React, { Component } from "react";
 import { useLocation } from "react-router-dom";
-import Force from "./Force";
+import Visuals from "./Visuals";
 import Artist from "./artistSearch";
 import { getArtist } from "./spotifyFunctions";
 import {useEffect, useState } from "react";
@@ -9,134 +9,82 @@ import "./Results.css";
  
 const Results = props => {
   const location = useLocation();
+  // console.log(location.state.detail);
   const searchTerm = location.state.detail;
-  let numRecs = location.state.number;
-  console.log("NUMRECS:", numRecs);
-  if(numRecs === ''){
-    numRecs = 5;
-  }
-  // const [recommendation, setRecommendation] = useState({});
+
+  const [recommendation, setRecommendation] = useState(null);
+  // const [searchTerm, setSearchTerm] = useState("");
   const [choice, setChoice] = useState(false);
   const [artist, setArtist] = useState({});
-  const [data_obj, setData_obj] = useState({
+
+  var data_obj = {
     name: searchTerm,
     children: []
-  })
-  // const [recNames, setRecNames] = useState([]);
-
-  // var data_obj = {
-  //   name: searchTerm,
-  //   children: []
-  // };
+  };
   let recNames = [];
+  let listItems;
 
   useEffect(() => {
-    // console.log(searchTerm);
+    console.log(searchTerm);
+
     const get_artist = async() => {
       const my_artist =  await getArtist(searchTerm);
       setArtist(my_artist);
-      if (artist.name !== undefined) {
-        console.log("artist has been set to: ", artist.name);
-        setChoice(true);
-        getRecommendation(artist.name);
-        // fillGraph();
-      }
-      console.log("get_artist inside of use_effect is being called");
+      setChoice(true);
+      getRecommendation(artist.name);
     }
-    // && choice === false
-    if (searchTerm !== "" && choice === false) {
+    if (searchTerm !== "") {
       get_artist();
     }
-  }, [choice, artist, data_obj, searchTerm]);
+  }, [searchTerm, choice]);
 
   async function getRecommendation(searchTerm) {
-      fetch(
+    try {
+      let response = await fetch(
         base_url +
           "k=" +
           process.env.REACT_APP_TASTEDIVE_KEY +
           "&q=" +
-          searchTerm +
-          "&limit="+
-          numRecs
-      )
-        .then(response => response.json())
-        .then(data => {
-          console.log("returned data", data);
-          fillGraph(data);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-        
-
-      // let data = await response.json();
-      // console.log("returned data", data);
-      // // console.log(base_url + "k=" + taste_dive_key + "&q=" + searchTerm);
-      // // setRecommendation(data);
-      // return data;
-
-    // let obj = {
-    //   Similar: {
-    //     Results: [
-    //       {Name: "hello1"}, {Name: "hello2"}, {Name: "hello3"}, {Name: "hello4"}, {Name: "hello5"}
-    //     ]
-    //   }
-    // }
-    // console.log("dummy obj in getRec is: ", obj);
-    // setRecommendation(obj);
-
-  }
-
-function fillGraph(recommendation) {
-    // let recommendation = await getRecommendation(searchTerm);
-    console.log("recommendation is: ", recommendation);
-    if (recommendation.Similar === undefined) {
-      for (var i = 0; i < numRecs; ++i) {
-        recNames.push({"name": ""});
-      }
-    } else {
-      for (var i = 0; i < numRecs; ++i) {
-        recNames.push({"name": recommendation.Similar.Results[i].Name});
-      }
+          searchTerm
+      );
+      let data = await response.json();
+      console.log(data);
+      // console.log(base_url + "k=" + taste_dive_key + "&q=" + searchTerm);
+      setRecommendation(data);
+    } catch (error) {
+      console.log(error);
     }
-
-    // {Name: "hello1"}, {Name: "hello2"}, {Name: "hello3"}, {Name: "hello4"}, {Name: "hello5"}
-
-    //
- 
-    // for (i = 0; i < 5; ++i) {
-    //   // data_obj.children.push({ name: recNames[i] });
-    //   let hold = data_obj;
-    //   console.log("hold is: ", hold);
-    //   hold.children.push({ name: recNames[i] });
-
-    //   setData_obj(hold);
-
-    // }
-    console.log("recNames: ", recNames);
-    let hold = data_obj;
-    hold.children = [...recNames];
-    setData_obj(hold);
-
-    console.log("fillGraph is being called");
-    console.log("filled data: ", data_obj);
   }
 
-  // if (choice === true) {
+  if (recommendation === null || recommendation.Similar.Results.length === 0) {
+    for (var i = 0; i < 5; ++i) {
+      recNames.push(" ");
+    }
+  } else {
+    for (var i = 0; i < 5; ++i) {
+      recNames.push(recommendation.Similar.Results[i].Name);
+    }
+  }
+
+  for (i = 0; i < 5; ++i) {
+    data_obj.children.push({ name: recNames[i] });
+  }
+
+  if (choice === true) {
     return (
           <div className= "container"> 
             <Artist artist={artist}/>
-            <Force data={data_obj}/>
+            <Visuals data={data_obj}/>
           </div>
         );
-  // }
-  // else {
-  //   return (
-  //     <div>
-  //       <h2>You selected: {location.state.detail}</h2>
-  //     </div>
-  //   );
-  // }
+  }
+  else {
+    return (
+      <div>
+        <h2>You selected: {location.state.detail}</h2>
+      </div>
+    );
+  }
 }
 
  
