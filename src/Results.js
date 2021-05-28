@@ -11,6 +11,10 @@ const Results = props => {
   const location = useLocation();
   // console.log(location.state.detail);
   const searchTerm = location.state.detail;
+  let numRecs = location.state.number;
+  if(numRecs === ''){
+    numRecs = 5;
+  }
 
   const [recommendation, setRecommendation] = useState(null);
   // const [searchTerm, setSearchTerm] = useState("");
@@ -45,7 +49,9 @@ const Results = props => {
           "k=" +
           process.env.REACT_APP_TASTEDIVE_KEY +
           "&q=" +
-          searchTerm
+          searchTerm +
+          "&limit=" + 
+          numRecs
       );
       let data = await response.json();
       console.log(data);
@@ -57,16 +63,16 @@ const Results = props => {
   }
 
   if (recommendation === null || recommendation.Similar.Results.length === 0) {
-    for (var i = 0; i < 5; ++i) {
+    for (var i = 0; i < numRecs; ++i) {
       recNames.push(" ");
     }
   } else {
-    for (var i = 0; i < 5; ++i) {
+    for (var i = 0; i < numRecs; ++i) {
       recNames.push(recommendation.Similar.Results[i].Name);
     }
   }
 
-  for (i = 0; i < 5; ++i) {
+  for (i = 0; i < numRecs; ++i) {
     data_obj.children.push({ name: recNames[i] });
   }
 

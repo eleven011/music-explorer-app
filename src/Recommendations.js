@@ -91,10 +91,12 @@ function Search() {
   let history = useHistory();
   const handleOnClick = () => {
     let artistToSearch = document.getElementById("artist-search").value;
+    let numRecs = document.getElementById("num-recs").value;
     console.log(artistToSearch);
     history.push({
       pathname: '/results', 
-      state: {detail: artistToSearch}
+      state: {detail: artistToSearch, 
+              number: numRecs}
     });
   }
   const handleOnEnter = (e) => {
