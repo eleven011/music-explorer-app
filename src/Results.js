@@ -20,6 +20,7 @@ const Results = props => {
   // const [searchTerm, setSearchTerm] = useState("");
   const [choice, setChoice] = useState(false);
   const [artist, setArtist] = useState({});
+  const[youtubeID, setYoutubeID] =useState("");
 
   var data_obj = {
     name: searchTerm,
@@ -46,17 +47,19 @@ const Results = props => {
     try {
       let response = await fetch(
         base_url +
-          "k=" +
+          "&k=" +
           process.env.REACT_APP_TASTEDIVE_KEY +
           "&q=" +
           searchTerm +
           "&limit=" + 
           numRecs
       );
+      console.log("URL RESPONSE:", response);
       let data = await response.json();
       console.log(data);
       // console.log(base_url + "k=" + taste_dive_key + "&q=" + searchTerm);
       setRecommendation(data);
+      setYoutubeID(data.Similar.Info[0].yID);
     } catch (error) {
       console.log(error);
     }
@@ -67,6 +70,8 @@ const Results = props => {
       recNames.push(" ");
     }
   } else {
+    // console.log("YID:", recommendation.Similar.Info[0].yID);
+    // const yID = recommendation.Similar.Info[0].yID ;
     for (var i = 0; i < numRecs; ++i) {
       recNames.push(recommendation.Similar.Results[i].Name);
     }
@@ -76,10 +81,11 @@ const Results = props => {
     data_obj.children.push({ name: recNames[i] });
   }
 
+      console.log("YID to pass: ",youtubeID);
   if (choice === true) {
     return (
           <div className= "container"> 
-            <Artist artist={artist}/>
+            <Artist artist={artist} yID={youtubeID}/>
             <Visuals data={data_obj}/>
           </div>
         );

@@ -68,7 +68,6 @@ function Search() {
       recNames.push(" ");
     }
   } else {
-    console.log("data", recommendation.Similar.Info);
     for (var i = 0; i < 5; ++i) {
       recNames.push(recommendation.Similar.Results[i].Name);
     }

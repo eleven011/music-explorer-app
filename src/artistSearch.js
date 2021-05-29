@@ -2,9 +2,10 @@
 import "./artistSearch.css";
 import YouTube from "react-youtube";
 
-const Artist = ({artist}) => {
+const Artist = ({artist}, {yID}) => {
 
-    // console.log(artist);
+    console.log("YOUTUBE ID PASSED: ", yID);
+  
 
       return (
           <div className="card card-flip">
@@ -21,7 +22,7 @@ const Artist = ({artist}) => {
                     <div>
                     <YouTube
                     className="youtube-player"
-                    videoId="or6Ixeplex4"/>
+                    videoId={yID}/>
                     </div>
 
                      
