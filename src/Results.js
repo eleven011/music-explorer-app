@@ -84,8 +84,8 @@ const Results = props => {
       console.log("YID to pass: ",youtubeID);
   if (choice === true) {
     return (
-          <div className= "container"> 
-            <Artist artist={artist} yID={youtubeID}/>
+          <div className= "container2"> 
+            <Artist artist={artist}/>
             <Visuals data={data_obj}/>
           </div>
         );

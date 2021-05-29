@@ -22,7 +22,7 @@ class Main extends Component {
     return (
         <Router>
             <div>
-              <h1 className="site-title"><Link to="/">Music Explorer</Link></h1>
+              <h1 className="site-title"><Link to="/">New Search</Link></h1>
                     {/* {/* <ul className="header"> 
                         // <li><Link to="/">Home</Link></li>
                         // <li><Link to="/visuals">Visuals</Link></li>
