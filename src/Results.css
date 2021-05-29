@@ -21,17 +21,40 @@
 
 .left {
   left: 0;
-  background-color: black;
+  animation: fade 6s;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+@keyframes fade {
+  0% {
+    background-color: rgb(0, 0, 0);
+  }
+
+  50% {
+    background-color: rgb(0, 0, 0);
+  }
+  75% {
+    background-color: rgb(0, 0, 0);
+  }
+
+  100% {
+    background-color: rgba(242, 245, 169, 0);
+  }
 }
 
 .right {
   right: 0;
 }
 
-#artist-search {
+#artist-search-input {
   border-radius: 10px;
   max-width: 170px;
   margin-right: 2px;
+  min-height: 30px;
+  background-color: white;
+}
+#artist-search-input:focus {
+  outline: none;
 }
 
 .btn {
@@ -49,6 +72,10 @@
   max-width: 85px;
 }
 
+#num-recs:focus {
+  outline: none;
+}
+
 .centered {
   position: absolute;
   top: 50%;
@@ -58,7 +85,6 @@
 }
 .centered .search-circle {
   background-color: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(100px);
   animation-name: fadeInOpacity;
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
@@ -66,6 +92,12 @@
   animation-delay: 2s;
   animation-fill-mode: forwards;
   opacity: 0;
+  transition: all 0.1s ease-in-out;
+}
+
+.search-circle:hover {
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 10px 25px rgba(145, 92, 182, 0.4);
 }
 
 .welcome {
