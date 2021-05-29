@@ -78,7 +78,7 @@ const Results = props => {
 
   if (choice === true) {
     return (
-          <div className= "container"> 
+          <div className= "container2"> 
             <Artist artist={artist}/>
             <Visuals data={data_obj}/>
           </div>
