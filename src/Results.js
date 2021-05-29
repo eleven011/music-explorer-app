@@ -20,7 +20,7 @@ const Results = props => {
   // const [searchTerm, setSearchTerm] = useState("");
   const [choice, setChoice] = useState(false);
   const [artist, setArtist] = useState({});
-  const[youtubeID, setYoutubeID] =useState("");
+  const[youtubeID, setYoutubeID] = useState("");
 
   var data_obj = {
     name: searchTerm,
@@ -85,7 +85,7 @@ const Results = props => {
   if (choice === true) {
     return (
           <div className= "container2"> 
-            <Artist artist={artist}/>
+            <Artist artist={artist} yID={youtubeID}/>
             <Visuals data={data_obj}/>
           </div>
         );

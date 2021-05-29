@@ -2,7 +2,7 @@
 import "./artistSearch.css";
 import YouTube from "react-youtube";
 
-const Artist = ({artist}) => {
+const Artist = ({artist}, {yID}) => {
   const genres = artist.genres.map((item) => <li>{item}</li>);
 
       return (
