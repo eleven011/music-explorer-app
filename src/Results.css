@@ -49,7 +49,12 @@
   align-items: center;
 }
 
-#artist-search {
+.artist-search-group {
+  display: block;
+  margin-top: 20%;
+}
+
+.artist-search {
   border-radius: 10px;
   max-width: 170px;
   margin-right: 2px;
@@ -57,17 +62,21 @@
   background-color: white;
   justify-content: center;
 }
-#artist-search-input:focus {
+
+.artist-search:focus {
   outline: none;
 }
-
 .btn {
   background-color: rgba(255, 255, 255, 0.15);
   border: white;
   justify-content: center;
-  top: 50%;
   display: flex;
   align-items: center;
+  margin: auto;
+}
+
+.btn:focus {
+  background-color: black;
 }
 
 .btn:hover {
@@ -96,6 +105,7 @@
   transform: translate(-50%, -50%);
   text-align: center;
 }
+
 .search-circle {
   justify-content: center;
   align-items: center;
@@ -112,11 +122,6 @@
   animation-fill-mode: forwards;
   opacity: 0;
   transition: all 0.1s ease-in-out;
-}
-
-.search-circle:hover {
-  color: rgba(255, 255, 255, 1);
-  box-shadow: 0 10px 25px rgba(145, 92, 182, 0.4);
 }
 
 .welcome {
@@ -157,4 +162,19 @@
   #num-recs {
     justify-content: center;
   }
+}
+
+.modal {
+  display: none;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+}
+
+.modal-backdrop {
+  z-index: -1;
+}
+
+.modal-header {
+  display: block;
 }

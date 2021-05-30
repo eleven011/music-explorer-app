@@ -49,8 +49,21 @@ body {
   transition: all 0.4s ease;
   width: 30vw;
   height: 30vw;
+  box-shadow: 0 10px 25px rgba(145, 92, 182, 0.4);
 }
-#artist-search {
+
+button.btn.btn-info.btn-sm {
+  margin-top: 5px;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 1s;
+  animation-delay: 7s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+artist-search {
   min-height: 30px;
 }
 /*
@@ -81,4 +94,13 @@ body {
 input[type="text"] {
   height: 20px;
   padding: 5px;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

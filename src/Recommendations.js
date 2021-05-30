@@ -116,14 +116,10 @@ function Search() {
       </div>
       <div className="split right">
           <div className="search-circle">
-            <div className="artist-search">
-              <label htmlFor="artist-search">
-              <input
-              type="text"
-              id="artist-search"
-              placeholder="Search for an artist..."
-              onKeyDown={handleOnEnter}/>
-              </label>
+            <div className="artist-search-group">
+              <input className="artist-search" id="artist-search" type="input" placeholder="Search for an artist..."
+              onKeyDown={handleOnEnter} required/>
+              <label className="artist-search-label" id="artist-search-label" htmlFor="artist-search"></label>
               <label htmlFor="num-recs"> 
               <input
               id="num-recs"
@@ -133,7 +129,26 @@ function Search() {
               placeholder="# of recs"/>
               </label>
               <div>
-              <input className="btn btn-primary" type="submit" value="Explore!" onClick= {handleOnClick} />
+              <input className="btn btn-primary btn-lg" type="submit" value="Explore!" onClick= {handleOnClick} />
+
+              <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">About Us...</button>
+              <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Music Explorer Team</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>VIVIAN ALSO NICKI ALSO KEVIN</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+                </div>
+
               </div>
           </div>
         </div>

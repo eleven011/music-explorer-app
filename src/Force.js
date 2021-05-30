@@ -63,7 +63,7 @@ function Force({ data }){
 
         const simulation = forceSimulation(nodeData)
             .force("center", forceCenter(height / 2, width / 2))
-            .force("charge", forceManyBody().strength(-45))
+            .force("charge", forceManyBody().strength(-75))
             .force("collide", forceCollide(30))
             .alphaDecay(0.02)
             .alphaMin(0.0001)
@@ -94,6 +94,7 @@ function Force({ data }){
                     .join("circle")
                     .attr("class", "node")
                     .attr("fill", "white")
+                    .attr("strok", "black")
                     .attr("r", 15)
                     .attr("cx", node => node.x)
                     .attr("cy", node => node.y)
@@ -117,7 +118,7 @@ function Force({ data }){
                   
                     function dragStart(d,i,nodes){
                         select(nodes[i])
-                          .style("stroke", "red")  
+                          .style("stroke", "black")  
                       }
                       
                     function dragging(d,i,nodes){
@@ -153,11 +154,16 @@ function Force({ data }){
                 svg.on("mousemove", () => {
                     const [x, y] = mouse(svgRef.current);
                     simulation
-                        .force("x", forceX(x).strength(node => 0.15 + node.depth * 0.1))
-                        .force("y", forceY(y).strength(node => 0.15 + node.depth * 0.1))
-                        .restart(1);
-
+                        .force("x", forceX(x)
+                            .strength(node => 0.15 + node.depth * 0.1))
+                        .force("y", forceY(y)
+                            .strength(node => 0.15 + node.depth * 0.1))
+                        .alpha(0.2).restart();
                 });
+
+                svg.on("mouseclick", () => {
+                    simulation.alpha(0.2).restart();
+                })
 
                 /* THIS IS THE UPDATED BUT CURRENTLY NOT WORKING BUILD
 
