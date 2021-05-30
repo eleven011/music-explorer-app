@@ -84,9 +84,6 @@ function Search() {
     children: []
   };
 
-  //
-
-
   for (i = 0; i < 5; ++i) {
     data_obj.children.push({ name: recNames[i] });
   }
@@ -114,10 +111,9 @@ function Search() {
         <div className="centered">
           <h2 className="welcome">Welcome to Music Explorer</h2>
           <br></br>
-          <p className="helpful">Enter the band name you would like to see recommendations of</p>
+          <p className="helpful">Enter the artist name you would like to see recommendations of</p>
       </div>
       </div>
-      
       <div className="split right">
           <div className="search-circle">
             <div className="artist-search">
