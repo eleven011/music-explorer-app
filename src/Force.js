@@ -94,7 +94,7 @@ function Force({ data }){
                     .join("circle")
                     .attr("class", "node")
                     .attr("fill", "white")
-                    .attr("strok", "black")
+                    .attr("stroke", "black")
                     .attr("r", 15)
                     .attr("cx", node => node.x)
                     .attr("cy", node => node.y)

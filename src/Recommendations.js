@@ -3,12 +3,12 @@ import {useEffect, useState } from "react";
 import{base_url} from "./constants";
 import Visuals from "./Visuals";
 import Artist from "./artistSearch";
+import About from "./About.js";
 import { getArtist } from "./spotifyFunctions";
 import { useHistory } from "react-router-dom";
 // import env from "react-dotenv";
 // import { directive } from "@babel/types";
 // import ReactDOM from 'react-dom';
-
 
 function Search() {
   const [recommendation, setRecommendation] = useState(null);
@@ -140,7 +140,7 @@ function Search() {
                       <h4 class="modal-title">Music Explorer Team</h4>
                     </div>
                     <div class="modal-body">
-                      <p>VIVIAN ALSO NICKI ALSO KEVIN</p>
+                      <About/>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
