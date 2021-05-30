@@ -1,6 +1,7 @@
 h1.site-title {
   left: 40%;
   padding: 10px;
+  opacity: 0.2;
   position: fixed;
   color: royalblue;
   overflow: hidden;
@@ -20,4 +21,5 @@ h1.site-title {
 
 .site-title:hover {
   background-position: 0 100%;
+  opacity: 1;
 }

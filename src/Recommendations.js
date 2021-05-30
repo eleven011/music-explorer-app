@@ -22,7 +22,7 @@ function Search() {
   };
   let recNames = [];
   let listItems;
-
+//
   
   // useEffect(() => {
   //   const delayDebounceFn = setTimeout(() => {
@@ -48,7 +48,7 @@ function Search() {
     try {
       let response = await fetch(
         base_url +
-          "k=" +
+          "&k=" +
           process.env.REACT_APP_TASTEDIVE_KEY +
           "&q=" +
           searchTerm
@@ -84,6 +84,9 @@ function Search() {
     children: []
   };
 
+  //
+
+
   for (i = 0; i < 5; ++i) {
     data_obj.children.push({ name: recNames[i] });
   }
@@ -116,7 +119,6 @@ function Search() {
       </div>
       
       <div className="split right">
-        <div className="centered">
           <div className="search-circle">
             <div className="artist-search">
               <label htmlFor="artist-search">
@@ -137,7 +139,6 @@ function Search() {
               <div>
               <input className="btn btn-primary" type="submit" value="Explore!" onClick= {handleOnClick} />
               </div>
-            </div>
           </div>
         </div>
       </div>

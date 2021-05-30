@@ -44,14 +44,18 @@
 
 .right {
   right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#artist-search-input {
+#artist-search {
   border-radius: 10px;
   max-width: 170px;
   margin-right: 2px;
   min-height: 30px;
   background-color: white;
+  justify-content: center;
 }
 #artist-search-input:focus {
   outline: none;
@@ -60,11 +64,20 @@
 .btn {
   background-color: rgba(255, 255, 255, 0.15);
   border: white;
+  justify-content: center;
+  top: 50%;
+  display: flex;
+  align-items: center;
 }
 
 .btn:hover {
   background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(200px);
+}
+
+.div.search-circle {
+  justify-content: center;
+  margin: auto;
 }
 
 #num-recs {
@@ -83,7 +96,13 @@
   transform: translate(-50%, -50%);
   text-align: center;
 }
-.centered .search-circle {
+.search-circle {
+  justify-content: center;
+  align-items: center;
+  width: 25vw;
+  height: 25vw;
+  display: flex;
+  border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.15);
   animation-name: fadeInOpacity;
   animation-iteration-count: 1;
@@ -126,5 +145,16 @@
   }
   100% {
     opacity: 1;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .search-circle {
+    background-color: transparent;
+    justify-content: center;
+    margin: auto;
+  }
+
+  #num-recs {
+    justify-content: center;
   }
 }
