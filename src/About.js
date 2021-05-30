@@ -11,7 +11,7 @@ import {
     forceY,
     drag
 } from "d3";
-//import useResizeObserver from "./useResizeObserver";
+
 
 const data = {
       name: "Music Explorer ",
@@ -28,13 +28,10 @@ const data = {
       ]
     };
 
-function About(){
 
+function About(){
     // Reference object 
     const svgRef = useRef();
-    const wrapper = useRef();
-    //const dimensions = useResizeObserver(wrapperRef);
-
     
     // useEffect hook
     useEffect(() => {
@@ -70,7 +67,7 @@ function About(){
 
         const simulation = forceSimulation(nodeData)
             .force("center", forceCenter(height / 2, width / 2))
-            .force("charge", forceManyBody().strength(-75))
+            .force("charge", forceManyBody().strength(-30))
             .force("collide", forceCollide(30))
             .alphaDecay(0.02)
             .alphaMin(0.0001)
@@ -115,33 +112,7 @@ function About(){
                         //a wrapper for getRecommendation
                         // spotifyKickoff(d.data.name);
                     })
-                    //.on("dblclick", dblclick)
-                    .call(drag()
-                        .on('start', dragStart)
-                        .on('drag', dragging)
-                        .on('end', dragEnd)
-                      )
-                  
-                    function dragStart(d,i,nodes){
-                        select(nodes[i])
-                          .style("stroke", "black")  
-                      }
-                      
-                    function dragging(d,i,nodes){
-                        let [xCoor, yCoor] = mouse(svgRef.current)
-                        console.log(select(nodes[i]))
-                        select(nodes[i])
-                          .attr("cx", xCoor)
-                          .attr("cy", yCoor)
-                      }
-                      
-                      function dragEnd(d,i,nodes){
-                         select(nodes[i])
-                          .style("stroke", "black")
-                      }
                 
-                
-                // set up the band labels
                 svg
                     .selectAll(".label")
                     .data(nodeData)
@@ -152,10 +123,8 @@ function About(){
                     .text(node => node.data.name)
                     .attr("x", node => node.x)
                     .attr("y", node => node.y)
-                    // .on("click", function(d){
-                    //     console.log(d.data.name);
-                    // })
                 });
+
 
                 svg.on("mousemove", () => {
                     const [x, y] = mouse(svgRef.current);
@@ -167,16 +136,10 @@ function About(){
                         .alpha(0.2).restart();
                 });
 
-                svg.on("mouseclick", () => {
-                    simulation.alpha(0.2).restart();
-                })
-
-           
-
-    }, [data]); // any time the data or dimensions change this is called again
+    }, []); // any time the data or dimensions change this is called again
 
     return (
-        <div ref={wrapper} style={{ marginBottom: "0rem" }}>
+        <div>
             <svg ref={ svgRef }></svg>
         </div>
     )
