@@ -108,3 +108,7 @@ https://stackoverflow.com/questions/20449512/how-to-add-custom-colors-in-d3-node
 https://stackoverflow.com/questions/31203720/how-to-place-an-image-in-d3-node
 https://stackoverflow.com/questions/34166936/adding-a-image-to-a-d3-node-along-with-circle
 https://stackoverflow.com/questions/49829616/how-to-use-hover-and-add-text-over-node-in-d3-force-simulation
+
+
+# Other resources
+https://www.kirupa.com/react/creating_single_page_app_react_using_react_router.htm

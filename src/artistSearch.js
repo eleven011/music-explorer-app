@@ -4,7 +4,7 @@ import YouTube from "react-youtube";
 
 const Artist = ({artist}, {yID}) => {
   const genres = artist.genres.map((item) => <li>{item}</li>);
-
+  console.log("PASSED YID: ", yID);
       return (
           <div className="card card-flip">
                 <div className="card-front">
