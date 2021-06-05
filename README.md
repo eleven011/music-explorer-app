@@ -4,6 +4,38 @@ This is our Front End Web Dev final project. This website will allow users to pr
 
 Kevin Carroll, Vivian Killian, Nicki Wahlers
 
+# General resources:
+
+React SPA
+
+https://www.kirupa.com/react/creating_single_page_app_react_using_react_router.htm
+
+Start search after user stops typing
+
+https://stackoverflow.com/questions/42217121/how-to-start-search-only-when-user-stops-typing
+
+Flexbox
+
+https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+Circles in CSS
+
+https://www.freecodecamp.org/news/css-shapes-explained-how-to-draw-a-circle-triangle-and-more-using-pure-css/
+
+# Spotify resources
+
+Authorization guide
+
+https://developer.spotify.com/documentation/general/guides/authorization-guide/
+
+Client credential flow
+
+https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow
+
+Quick start:
+
+https://developer.spotify.com/documentation/web-api/quick-start/
+
 # Resources used for D3:
 
 D3 Github
@@ -108,7 +140,3 @@ https://stackoverflow.com/questions/20449512/how-to-add-custom-colors-in-d3-node
 https://stackoverflow.com/questions/31203720/how-to-place-an-image-in-d3-node
 https://stackoverflow.com/questions/34166936/adding-a-image-to-a-d3-node-along-with-circle
 https://stackoverflow.com/questions/49829616/how-to-use-hover-and-add-text-over-node-in-d3-force-simulation
-
-
-# Other resources
-https://www.kirupa.com/react/creating_single_page_app_react_using_react_router.htm
